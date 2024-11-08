@@ -53,3 +53,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+
+gem 'dotenv-rails'
+
+gem 'cloudinary'
+gem 'activestorage-cloudinary-service'

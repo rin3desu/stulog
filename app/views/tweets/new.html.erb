@@ -29,6 +29,11 @@
     <%= f.text_area :comment, :size => "30x6" %>
   </div>
 
+  <div class="field">
+    <%= f.label :"記録" %>
+    <%= f.file_field :image %>
+  </div>
+
   <%= f.submit "記録する" %>
 <% end %>
 

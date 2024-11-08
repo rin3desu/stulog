@@ -12,6 +12,9 @@
       <%= t.section %>
       <%= t.comment %>
       <%= t.created_at%>
+      <% if t.image.attached? %>
+            <%= image_tag t.image, size: '250x200'%>
+      <% end %>
       <%= link_to "詳細へ", tweet_path(t.id) %>  
       <%= link_to "編集する", edit_tweet_path(t.id) %>
       <%= button_to "削除する", tweet_path(t.id), method: :delete %>
