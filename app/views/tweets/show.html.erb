@@ -1,0 +1,17 @@
+<h1>GeekTwitter</h1>
+<h2>Tweet詳細</h2>
+
+<div class="tweet">
+  <h3>模試の種類</h3>
+  <p><%= @tweet.test %></p>
+  <h3>科目名</h3>
+  <p><%= @tweet.subject %></p>
+  <h3>単元名</h3>
+  <p><%= @tweet.section %></p>
+  <h3>感想・次回までにやること</h3>
+  <p><%= @tweet.comment %></p>
+  <h3>投稿日時</h3>
+  <p><%= @tweet.created_at%></p>
+</div>
+<%= link_to "編集する", edit_tweet_path(@tweet.id) %>
+<%= link_to "Tweet一覧に戻る", tweets_path %>

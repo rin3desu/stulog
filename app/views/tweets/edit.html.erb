@@ -1,0 +1,33 @@
+<h1>編集を行う</h1>
+
+<%= form_for @tweet do |f| %>
+  
+  <%# データ型がstringで自由記述の入力フォーム %>
+  <div class="field">
+    <%= f.label :"模試の種類" %>
+    <%= f.text_field :test, :size => 30 %>
+  </div>
+
+  <%# データ型がstringで選択式の入力フォーム %>
+  <div class="field">
+    <%= f.label :"教科" %>
+    <%= f.select :subject, 
+    [["英語", "英語"], 
+    ["数学", "数学"], 
+    ["化学", "化学"]], include_blank: "選択して下さい" %>
+  </div>
+
+  <%# データ型がstringで自由記述の入力フォーム %>
+  <div class="field">
+    <%= f.label :"単元名" %>
+    <%= f.text_field :section, :size => 30 %>
+  </div>
+
+  <%# データ型がtextで自由記述の入力フォーム %>
+  <div class="field">
+    <%= f.label :"感想"  %>
+    <%= f.text_area :comment, :size => "30x6" %>
+  </div>
+
+  <%= f.submit "編集する" %>
+<% end %>
