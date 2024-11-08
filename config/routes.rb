@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   get 'tweets/:id/edit' => 'tweets#edit', as:'edit_tweet'
 
-  resources :tweets
-  
+  resources :tweets do
+  resources :likes, only: [:create, :destroy]
+  end
 end
