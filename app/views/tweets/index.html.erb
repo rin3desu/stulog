@@ -1,11 +1,16 @@
 <h1>結果を記録する</h1>
 <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %> 
-
+<% if user_signed_in? %>
+  <%= link_to "マイページへ", user_path(current_user.id) %>
+<% end %>
 <h3>一覧ページ</h3>
 <%= link_to "新規投稿へ", new_tweet_path %>
 <div class="tweets-container">
   <% @tweets.each do |t| %>
     <div class="tweet">
+      <% if t.user.image.attached? %>
+          <%= image_tag  t.user.image, size: '250x200'%>
+      <% end %>
       <%= t.user.email %>
       <%= t.test %>
       <%= t.subject %>
