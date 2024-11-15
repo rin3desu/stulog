@@ -1,0 +1,7 @@
+<%= form_with(model: @youtube, local: true) do |f| %>
+  <%= f.label :youtube_url %><br>
+  <%= f.text_field :youtube_url, size: 140 %><br>
+  <%= f.label :body %><br>
+  <%= f.text_field :body, size: 140 %><br>
+  <%= f.submit "投稿する" %>
+<% end %>
