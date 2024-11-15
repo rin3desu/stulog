@@ -1,0 +1,32 @@
+<h1>編集</h1>
+
+<%= form_for @study_record do |f| %>
+
+  <%# データ型がstringで自由記述の入力フォーム %>
+  <div class="field">
+    <%= f.label :"科目" %>
+    <%= f.text_field :subject, :size => 30 %>
+  </div>
+
+  <%# データ型がstringで選択式の入力フォーム %>
+  <div class="field">
+    <%= f.label :"単元" %>
+    <%= f.text_field :section, :size => 30 %>
+  </div>
+
+  <%# データ型がIntegerの勉強時間の入力フォーム %>
+  <div class="field">
+    <%= f.label :"勉強時間" %>
+    <%= f.number_field :time, step: 0.1 %>
+  </div>
+
+  <%# データ型がtextで自由記述の入力フォーム %>
+  <div class="field">
+    <%= f.label :"感想"  %>
+    <%= f.text_area :comment, :size => "30x6" %>
+  </div>
+
+  <%= f.submit "記録する" %>
+<% end %>
+
+

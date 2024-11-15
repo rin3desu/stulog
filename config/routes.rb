@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
+
+  get 'mypage/index' => 'mypage#index'
   
-  get 'youtubes/index' => 'youtubes#index'
-  get 'youtubes/new' => 'youtubes#new'
-  get 'youtubes/show'
-  get 'youtubes/edit'
   devise_for :users
 
   resources :users, only: [:show]
@@ -14,5 +12,6 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
   resources :youtubes
+  resources :study_records
 
 end
