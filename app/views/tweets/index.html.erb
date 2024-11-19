@@ -2,6 +2,7 @@
 <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %> 
 <% if user_signed_in? %>
   <%= link_to "マイページへ", user_path(current_user.id) %>
+  
 <% end %>
 <h3>一覧ページ</h3>
 <%= link_to "新規投稿へ", new_tweet_path %>
@@ -39,6 +40,5 @@
       <%= button_to "削除する", tweet_path(t.id), method: :delete %>
     </div>
   <% end %>
-
-  
 </div>
+<%= link_to "トップページへ" , mypage_index_path%>

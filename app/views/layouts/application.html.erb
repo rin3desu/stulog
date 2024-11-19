@@ -9,7 +9,12 @@
     <script src="https://kit.fontawesome.com/55879bcb13.js" crossorigin="anonymous"></script>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%# <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %> 
+
+    <!-- もしChart.jsをCDNから読み込む場合、以下の行が必要 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
+
   </head>
 
   <body>

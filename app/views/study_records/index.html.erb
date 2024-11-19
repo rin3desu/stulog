@@ -1,5 +1,5 @@
 <h1>勉強記録</h1>
-
+<%= link_to "新しい記録を追加", new_study_record_path %>
 <table>
   <thead>
     <tr>
@@ -7,7 +7,6 @@
       <th>単元名</th>
       <th>勉強時間 (時間)</th>
       <th>感想</th>
-      <th>操作</th>
     </tr>
   </thead>
   <tbody>
@@ -26,12 +25,21 @@
   </tbody>
 </table>
 
-<h2>科目別勉強時間の合計</h2>
+<h2>勉強時間の集計</h2>
 <ul>
   <% @total_time_by_subject.each do |subject, total_time| %>
     <li><%= subject %>: <%= total_time %> 分</li>
   <% end %>
 </ul>
 
-<%= link_to "新しい記録を追加", new_study_record_path %>
+<p>総勉強時間: <%= @total_study_time %> 分</p>
+
+<h2>勉強時間の積み上げ棒グラフ</h2>
+<div id="chart-data" data-chart='<%= @chart_data %>' style="display: none;"></div>
+<canvas id="studyChart" width="400" height="200"></canvas>
+
+<%= javascript_pack_tag 'study_chart' %>
+
+
+
 <%= link_to "トップページへ" , mypage_index_path%>

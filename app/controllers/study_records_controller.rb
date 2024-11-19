@@ -1,7 +1,16 @@
 class StudyRecordsController < ApplicationController
   def index
     @study_records = StudyRecord.all
-    @total_time_by_subject = StudyRecord.group(:subject).sum(:time)
+
+    # 科目ごとの合計時間を計算
+    @total_time_by_subject = @study_records.group(:subject).sum(:time)
+
+    # 総勉強時間を計算
+    @total_study_time = @study_records.sum(:time)
+
+      # Chart.js用のデータ
+    @chart_data = @total_time_by_subject.map { |subject, time| { subject: subject, time: time } }.to_json
+
   end
 
   def new
