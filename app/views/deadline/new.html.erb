@@ -1,0 +1,93 @@
+<%= form_with model: @deadline, url: deadline_index_path, local: true do |f| %>
+  <p>
+    <%= f.hidden_field :deadline, id: "mission_deadline" %>
+    <input type="text" id="userYear" placeholder="年">年
+    <input type="text" id="userMonth" placeholder="月">月
+    <input type="text" id="userDate" placeholder="日">日
+    <input type="text" id="userHour" placeholder="時">時
+    <input type="text" id="userMin" placeholder="分">分
+    <input type="text" id="userSec" placeholder="秒">秒
+  </p>
+<% end %>
+<p id="RealtimeCountdownArea"></p> <!-- ここにタイマーが表示される -->
+
+<script>
+function set2fig(num) {
+  // 数値が1桁だったら2桁の文字列にして返す
+  var ret;
+  if (num < 10) { ret = "0" + num; }
+  else { ret = num; }
+  return ret;
+}
+
+function isNumOrZero(num) {
+  // 数値でなかったら0にして返す
+  if (isNaN(num)) { return 0; }
+  return num;
+}
+
+function showCountdown() {
+  // 現在日時を数値(1970-01-01 00:00:00からのミリ秒)に変換
+  var nowDate = new Date();
+  var dnumNow = nowDate.getTime();
+
+  // ユーザーが入力した日時を取得
+  var inputYear = document.getElementById("userYear").value;
+  var inputMonth = document.getElementById("userMonth").value - 1; // 月は0から始まるため
+  var inputDate = document.getElementById("userDate").value;
+  var inputHour = document.getElementById("userHour").value;
+  var inputMin = document.getElementById("userMin").value;
+  var inputSec = document.getElementById("userSec").value;
+
+  // 入力値から日時オブジェクトを作成
+  var targetDate = new Date(
+    isNumOrZero(inputYear),
+    isNumOrZero(inputMonth),
+    isNumOrZero(inputDate),
+    isNumOrZero(inputHour),
+    isNumOrZero(inputMin),
+    isNumOrZero(inputSec)
+  );
+  var dnumTarget = targetDate.getTime();
+
+  // 目標日時の表示用文字列
+  var dlYear = targetDate.getFullYear();
+  var dlMonth = targetDate.getMonth() + 1;
+  var dlDate = targetDate.getDate();
+  var dlHour = targetDate.getHours();
+  var dlMin = targetDate.getMinutes();
+  var dlSec = targetDate.getSeconds();
+  var msg1 = "設定した期限: " + dlYear + "/" + dlMonth + "/" + dlDate + " " + set2fig(dlHour) + ":" + set2fig(dlMin) + ":" + set2fig(dlSec);
+
+  // 日数の差を計算
+  var diff2Dates = dnumTarget - dnumNow;
+  var msg2 = '';
+
+  if (dnumTarget > dnumNow) {
+    // 期限までの日数
+    var dDays = diff2Dates / (1000 * 60 * 60 * 24);
+    diff2Dates = diff2Dates % (1000 * 60 * 60 * 24);
+    var dHour = diff2Dates / (1000 * 60 * 60);
+    diff2Dates = diff2Dates % (1000 * 60 * 60);
+    var dMin = diff2Dates / (1000 * 60);
+    diff2Dates = diff2Dates % (1000 * 60);
+    var dSec = diff2Dates / 1000;
+
+    msg2 = Math.floor(dDays) + "日"
+      + Math.floor(dHour) + "時間"
+      + Math.floor(dMin) + "分"
+      + Math.floor(dSec) + "秒";
+
+    msg = msg1 + " まで、あと " + msg2 + " です。";
+  } else {
+    // 期限が過ぎてしまった場合
+    msg = msg1 + " は、既に過ぎました。";
+  }
+
+  // 作成した文字列を表示
+  document.getElementById("RealtimeCountdownArea").innerHTML = msg;
+}
+
+// 1秒ごとにカウントダウンを更新
+setInterval('showCountdown()', 1000);
+</script>

@@ -1,6 +1,10 @@
+<h1>おすすめYoutubeチャンネル</h1>
+
 <% @youtubes.each do |t| %>
   <% if t.youtube_url.present? %>
+    <h3><%= t.body %></h3>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= find_youtube_url(t.youtube_url) %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
   <% end %>
   <%= link_to "詳細へ", youtube_path(t.id) %>
   <%= link_to "編集する", edit_youtube_path(t.id) %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_15_093950) do
+ActiveRecord::Schema.define(version: 2024_11_30_053316) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 2024_11_15_093950) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "deadlines", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "content"
+    t.string "penalty"
+    t.datetime "due_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer "tweet_id", null: false
     t.integer "user_id", null: false
@@ -64,6 +73,15 @@ ActiveRecord::Schema.define(version: 2024_11_15_093950) do
     t.string "section"
     t.integer "time"
     t.string "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "missions", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "content"
+    t.string "penalty"
+    t.datetime "deadline"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

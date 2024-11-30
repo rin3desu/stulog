@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
-  get 'mypage/index' => 'mypage#index'
+  
   
   devise_for :users
+  get 'mypage/index' => 'mypage#index'
+
+  resources :deadline, only: [:new, :show,:create]
+
 
   resources :users, only: [:show]
   get 'hello/index' => 'hello#index'
