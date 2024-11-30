@@ -1,15 +1,17 @@
 <%= form_with model: @deadline, url: deadline_index_path, local: true do |f| %>
   <p>
-    <%= f.hidden_field :deadline, id: "mission_deadline" %>
-    <input type="text" id="userYear" placeholder="年">年
-    <input type="text" id="userMonth" placeholder="月">月
-    <input type="text" id="userDate" placeholder="日">日
-    <input type="text" id="userHour" placeholder="時">時
-    <input type="text" id="userMin" placeholder="分">分
-    <input type="text" id="userSec" placeholder="秒">秒
+    <%= f.hidden_field :user_id %>
+    <input type="text" id="userYear" placeholder="年" name="deadline[user_year]">年
+    <input type="text" id="userMonth" placeholder="月" name="deadline[user_month]">月
+    <input type="text" id="userDate" placeholder="日" name="deadline[user_date]">日
+    <input type="text" id="userHour" placeholder="時" name="deadline[user_hour]">時
+    <input type="text" id="userMin" placeholder="分" name="deadline[user_min]">分
+    <input type="text" id="userSec" placeholder="秒" name="deadline[user_sec]">秒
   </p>
+  <%= f.submit "目標日を保存" %>
 <% end %>
-<p id="RealtimeCountdownArea"></p> <!-- ここにタイマーが表示される -->
+<p id="RealtimeCountdownArea"></p>
+
 
 <script>
 function set2fig(num) {

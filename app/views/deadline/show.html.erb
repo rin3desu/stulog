@@ -1,13 +1,16 @@
-      <p>期限 <%= @mission.deadline %>
-      <br>
-        <input type="hidden" id="userYear" value = "<%= @mission.deadline.year %>"  > 
-        <input type="hidden" id="userMonth"value = "<%= @mission.deadline.month %>" >
-        <input type="hidden" id="userDate" value = "<%= @mission.deadline.day %>" >
-        <input type="hidden" id="userHour" value = "<%= @mission.deadline.hour %>" >
-        <input type="hidden" id="userMin"  value = "<%= @mission.deadline.min %>" >
-        <input type="hidden" id="userSec"  value = "<%= @mission.deadline.sec %>" >
-      </p>
-      <p id="RealtimeCountdownArea" ></p>
+<% if @deadline.present? %>
+  <p>期限 <%= @deadline.due_date %></p>
+  <br>
+   <input type="hidden" id="userYear" value="<%= @deadline.due_date.year %>" >
+   <input type="hidden" id="userMonth" value="<%= @deadline.due_date.month %>" >
+   <input type="hidden" id="userDate" value="<%= @deadline.due_date.day %>" >
+   <input type="hidden" id="userHour" value="<%= @deadline.due_date.hour %>" >
+   <input type="hidden" id="userMin" value="<%= @deadline.due_date.min %>" >
+   <input type="hidden" id="userSec" value="<%= @deadline.due_date.sec %>" >
+
+<% else %>
+  <p>期限情報がありません。</p>
+<% end %>
 
 <script>
 
