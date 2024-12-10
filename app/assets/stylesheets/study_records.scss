@@ -1,3 +1,169 @@
 // Place all the styles related to the StudyRecords controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  background-color: #FFF5CE;
+}
+
+
+.header {
+  background-color: #B86C03;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px
+}
+
+.logo {
+  margin-left: 10px;
+  font-size: 50px;
+  font-style: italic;
+  font-weight: bold;
+  color: white;
+}
+
+.user_image{
+  margin-right: 10px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.main-container-Studyindex {
+  display: flex;
+  max-width: 1200px;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.record-section{
+  width: 60%;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 15px;
+  padding: 10px;
+}
+
+.record-list{
+  list-style: none;
+}
+
+.record-list li {
+  align-items: flex-start;
+  gap: 10px;
+  background-color: #ffffff;
+  box-shadow:
+    0 0 0 1px #E1D8B6,
+    0 0 0 0.5px #969079;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.datarow {
+  display: flex; /* 横並びにする */
+  align-items: center; /* 縦方向の中央揃え */
+  gap: 10px; /* 見出しとデータの間に余白を入れる */
+  margin-bottom: 8px; /* 各行の間に余白を追加 */
+}
+
+.heading{
+  font-size: 18px; /* 見出しの文字サイズ */
+  font-weight: bold; /* 太字にする（任意） */
+}
+
+.headingTime{
+  font-size: 14px; /* 見出しの文字サイズ */
+  font-weight: bold; /* 太字にする（任意） */
+}
+
+.Studyrecord{
+  font-size: 18px; /* データ部分の文字サイズ */
+  color: #333; /* 文字色（任意） */
+}
+
+.log-section{
+  width: 40%;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 15px;
+  padding: 10px;
+}
+
+.log-section h2{
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.log-area{
+  background-color: #ffffff;
+  box-shadow:
+    0 0 0 1px #E1D8B6,
+    0 0 0 0.5px #969079;
+  padding: 10px;
+}
+
+.log-list{
+  list-style: none;
+}
+
+.TotalTime{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #B86C03;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.newrecord{
+  display: inline-block;
+  background-color: #f8b04b; /* ボタンの赤色 */
+  color: #fff; /* 文字色（白） */
+  text-decoration: none; /* リンクの下線を消す */
+  font-size: 16px; /* 文字サイズ */
+  font-weight: bold; /* 太字 */
+  text-align: center; /* 文字を中央に配置 */
+  padding: 10px 20px; /* ボタンの内側の余白 */
+  border-radius: 50px; /* 丸みを持たせる */
+  position: relative; /* アイコンを配置するために必要 */
+  box-shadow: 0 4px #c28c40; /* 影をつける */
+  transition: all 0.2s ease-in-out; /* ホバー時のアニメーション */
+}
+
+.newrecord:hover {
+  transform: translateY(-2px); /* ホバー時に少し浮き上がる */
+  box-shadow: 0 6px #f8b04b; /* 影を少し伸ばす */
+}
+
+.newrecord:active {
+  transform: translateY(2px); /* クリック時に沈む */
+  box-shadow: 0 2px #f8b04b; /* 影を縮める */
+}
+
+/* ボタン内の矢印 */
+.newrecord::after {
+  content: "➔"; /* 矢印を表示 */
+  font-size: 16px; /* 矢印のサイズ */
+  margin-left: 10px; /* 文字との間に余白を追加 */
+  position: relative;
+  top: 1px; /* 矢印を微調整 */
+}
+
+.Record{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+

@@ -1,3 +1,68 @@
 // Place all the styles related to the Mypage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  background-color: #FFF5CE;
+}
+
+.header {
+  background-color: #B86C03;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px
+}
+
+.logo {
+  margin-left: 10px;
+  font-size: 50px;
+  font-style: italic;
+  font-weight: bold;
+  color: white;
+}
+
+.user_image{
+  margin-right: 10px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.main-content{
+  display: flex;
+  flex-direction: column;
+  padding: auto;
+}
+
+.deadline_string{
+  margin-top: 30px;
+  text-align: center;
+  font-size: 40px;
+  font-weight:bold;
+  color: #420F0F
+}
+
+.deadline_string2{
+  margin-top: -40px;
+  text-align: center;
+  font-size: 180px;
+  font-weight:bold;
+  color: #C33B04
+}
+
+.options{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+

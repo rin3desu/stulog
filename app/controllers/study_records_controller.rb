@@ -1,5 +1,6 @@
 class StudyRecordsController < ApplicationController
   def index
+    @user = current_user
     @study_records = StudyRecord.all
 
     # 科目ごとの合計時間を計算

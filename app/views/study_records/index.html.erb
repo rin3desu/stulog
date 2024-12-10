@@ -1,44 +1,89 @@
-<h1>勉強記録</h1>
-<%= link_to "新しい記録を追加", new_study_record_path %>
-<table>
-  <thead>
-    <tr>
-      <th>科目名</th>
-      <th>単元名</th>
-      <th>勉強時間 (時間)</th>
-      <th>感想</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @study_records.each do |record| %>
-      <tr>
-        <td><%= record.subject %></td>
-        <td><%= record.section %></td>
-        <td><%= record.time %></td>
-        <td><%= record.comment %></td>
-        <td>
-          <%= link_to "編集", edit_study_record_path(record) %> |
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyHack</title>
+    <link rel="stylesheet" href="study_records.scss">
+</head>
+<body>
+  <header class="header">
+    <h1 class="logo">StudyHack</h1>
+      <% if user_signed_in? %>
+        <%= link_to  mypage_index_path(current_user.id) do%>
+          <% if @user.image.attached? %>
+            <%= image_tag  @user.image,class: "user_image" %>
+          <% else %>
+            <%= image_tag "C:/GeekWeb/product/studysite/app/assets/images/pro1.png" ,class:"user_image"%>
+          <% end %>
+        <% end %>
+      <% end %>
+  </header>
+  
+  <main class="main-container-Studyindex">
+    <section class = "record-section">
+      <h2>勉強記録     </h2>
+      <ul class="record-list">
+      <% @study_records.each do |record| %>
+        <li>
+          <p class="list">
+            <div class="datarow">
+              <div class="heading">科目名</div>
+              <div class="Studyrecord"><%= record.subject %></div>
+            </div>
+          </p>
+          <p class="list">
+            <div class="datarow">
+              <div class="heading">単元名</div>
+              <div class="Studyrecord"><%= record.section %></div>
+            </div>
+          </p>
+          <p class="list">
+            <div class="datarow">
+              <div class="heading">勉強時間</div>
+              <div class="Studyrecord"><%= record.time %>min</div>
+            </div>
+          </p>
+          <p class="list">
+            <div class="datarow">
+              <div class="heading">感想</div>
+              <div class="Studyrecord"><%= record.comment %></div>
+            </div>
+          </p>
+          <p class="list">
+            <div class="datarow">
+              <div class="headingTime">投稿日時</div>
+              <div class="Studyrecord"><%= record.updated_at %></div>
+            </div>
+          </p>
+          <%= link_to "編集", edit_study_record_path(record) %> 
           <%= button_to "削除", study_record_path(record), method: :delete %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </li>
+      <% end %>
+    </section>
 
-<h2>勉強時間の集計</h2>
-<ul>
-  <% @total_time_by_subject.each do |subject, total_time| %>
-    <li><%= subject %>: <%= total_time %> 分</li>
-  <% end %>
-</ul>
+    <aside class="log-section">
+      <h2>勉強時間の集計</h2>
+      <div class="log-area">
+          <p class="TotalTime">総勉強時間: <%= @total_study_time %> min</p>
+        <ul class="log-list">
+          <% @total_time_by_subject.each do |subject, total_time| %>
+          <li>
+            <p class="list">
+              <div class="datarow">
+                <div class="heading"><%= subject %></div> 
+                <div class="Studyrecord"><%= total_time %> min</div>
+              </div>
+            </p>
+          </li>
+        <% end %>
+        </ul>
+        <div id="chart-data" data-chart='<%= @chart_data %>' style="display: none;"></div>
+        <canvas id="studyChart" width="400" height="200"></canvas>
 
-<p>総勉強時間: <%= @total_study_time %> 分</p>
-
-<div id="chart-data" data-chart='<%= @chart_data %>' style="display: none;"></div>
-<canvas id="studyChart" width="400" height="200"></canvas>
-
-<%= javascript_pack_tag 'study_chart' %>
-
-
-
-<%= link_to "トップページへ" , mypage_index_path%>
+        <%= javascript_pack_tag 'study_chart' %>
+        <p class="Record"><%= link_to "新しい記録を追加", new_study_record_path, class: "newrecord" %></p>
+      </div>
+    </aside>
+  </main>
+</body>
