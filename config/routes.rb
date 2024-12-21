@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :deadline, only: [:new, :show,:create]
 
+  
 
   resources :users, only: [:show]
   get 'hello/index' => 'hello#index'

@@ -1,3 +1,61 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.login-body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  background-image: url("C:/GeekWeb/product/studysite/app/assets/images/loginback2.png");
+}
+
+.main-content-login{
+  width: 40%;
+  margin-top: 70px;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-bottom: 30px;
+  text-align: center;
+  background-image: url("C:/GeekWeb/product/studysite/app/assets/images/notebook.png");
+  font-family: "Kiwi Maru", serif;  padding: 10px;
+  box-shadow:
+  2px 2px 0px #BBB7B2,
+  -2px -2px 0px #BBB7B2,
+  1px -1px 0px #BBB7B2,
+  -1px 1px 0px #BBB7B2;
+}
+
+.field{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px
+}
+
+.remenber{
+  font-family: "Kiwi Maru", serif;  padding: 5px;
+}
+
+.Login {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  background-color: #fefffe;
+  color: #333333;
+  text-decoration: none;
+  border-radius: 5px;
+  border-color: #fff;
+  box-shadow:
+  2px 2px 0px #BBB7B2,
+  -2px -2px 0px #BBB7B2,
+  1px -1px 0px #BBB7B2,
+  -1px 1px 0px #BBB7B2;
+  font-size: 16px;
+  font-family: 'Kiwi Maru', serif;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.Login:hover {
+  background-color: #9cadfd6f;
+}

@@ -1,6 +1,7 @@
 class YoutubesController < ApplicationController
   def index
     @youtubes = Youtube.all
+    @user = current_user
   end
 
   def new

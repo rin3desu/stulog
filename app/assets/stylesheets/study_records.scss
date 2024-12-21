@@ -12,32 +12,54 @@ body {
   font-family: Arial, sans-serif;
   color: #333;
   line-height: 1.6;
-  background-color: #FFF5CE;
+  background-color: #9fcbef;
+  background-image: url("C:/GeekWeb/product/studysite/app/assets/images/notebook.png");
+}
+.kiwi-maru-regular {
+  font-family: "Kiwi Maru", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-
-.header {
-  background-color: #B86C03;
+.head {
+  background-color: #FFF;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 20px
+  align-items: center; 
+  padding: 10px; 
+  margin-left: 15px;
+  margin-right: 15px;  
+  // border: solid;
+  // border-color: #4161ef;
+  // border-width: 4px;
+  // border-top: transparent;
+  // border-left: transparent;
+  // border-right: transparent;
+  
 }
 
 .logo {
   margin-left: 10px;
-  font-size: 50px;
-  font-style: italic;
+  font-size: 30px;
+  font-family: "Kiwi Maru";
   font-weight: bold;
-  color: white;
+  color: black;
+  border: solid;
+  border-color: #4161ef;
+  border-width: 4px;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  
 }
 
 .user_image{
   margin-right: 10px;
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
+
 
 .main-container-Studyindex {
   display: flex;
@@ -45,6 +67,7 @@ body {
   gap: 20px;
   padding: 20px;
   border-radius: 8px;
+  font-family: "Kiwi Maru", serif;
 }
 
 .record-section{
@@ -56,16 +79,19 @@ body {
 }
 
 .record-list{
+  display: flex;
+  flex-direction: column-reverse;
   list-style: none;
 }
 
 .record-list li {
   align-items: flex-start;
   gap: 10px;
-  background-color: #ffffff;
   box-shadow:
-    0 0 0 1px #E1D8B6,
-    0 0 0 0.5px #969079;
+  2px 2px 0px #92fcfc, 
+    -2px -2px 0px #92fcfc, 
+    1px -1px 0px #92fcfc,
+    -1px 1px 0px #92fcfc;
   padding: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -99,6 +125,7 @@ body {
   margin-left: 10px;
   margin-right: 15px;
   padding: 10px;
+  font-family: "Kiwi Maru", serif;
 }
 
 .log-section h2{
@@ -107,28 +134,32 @@ body {
 }
 
 .log-area{
-  background-color: #ffffff;
   box-shadow:
-    0 0 0 1px #E1D8B6,
-    0 0 0 0.5px #969079;
+    2px 2px 0px #19eaea, 
+    -2px -2px 0px #19eaea, 
+    1px -1px 0px #19eaea,
+    -1px 1px 0px #19eaea;
   padding: 10px;
 }
 
 .log-list{
   list-style: none;
+  font-family: "Kiwi Maru", serif;
+
 }
 
 .TotalTime{
   margin-top: 10px;
   margin-bottom: 10px;
-  color: #B86C03;
+  color: #4e5cff;
+  font-family: "Kiwi Maru", serif;
   font-size: 24px;
   font-weight: bold;
 }
 
 .newrecord{
   display: inline-block;
-  background-color: #f8b04b; /* ボタンの赤色 */
+  background-color: #415cf0; /* ボタンの赤色 */
   color: #fff; /* 文字色（白） */
   text-decoration: none; /* リンクの下線を消す */
   font-size: 16px; /* 文字サイズ */
@@ -137,13 +168,13 @@ body {
   padding: 10px 20px; /* ボタンの内側の余白 */
   border-radius: 50px; /* 丸みを持たせる */
   position: relative; /* アイコンを配置するために必要 */
-  box-shadow: 0 4px #c28c40; /* 影をつける */
+  box-shadow: 0 4px #03249b; /* 影をつける */
   transition: all 0.2s ease-in-out; /* ホバー時のアニメーション */
 }
 
 .newrecord:hover {
   transform: translateY(-2px); /* ホバー時に少し浮き上がる */
-  box-shadow: 0 6px #f8b04b; /* 影を少し伸ばす */
+  box-shadow: 0 6px #87b9f6; /* 影を少し伸ばす */
 }
 
 .newrecord:active {
@@ -165,5 +196,34 @@ body {
   margin-bottom: 10px;
   text-align: center;
 }
+.h1-newtweet{
+  margin-top: 10px;
+  text-align: center;
+  font-family: "Kiwi Maru", serif;  padding: 10px;
+}
+
+.main-container-newStudy{
+  width: 40%;
+  margin-top: 10px;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: "Kiwi Maru", serif;  padding: 10px;
+  box-shadow:
+  2px 2px 0px #022ef3, 
+  -2px -2px 0px #022ef3, 
+  1px -1px 0px #022ef3,
+  -1px 1px 0px #022ef3;
+}
+
+.field{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px
+}
+
+
 
 

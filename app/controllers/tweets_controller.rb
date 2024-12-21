@@ -2,12 +2,14 @@ class TweetsController < ApplicationController
 
   before_action :authenticate_user! # 追加
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.order(created_at: :desc)
+    @user = current_user
   end
 
   #追加箇所
   def new
     @tweet = Tweet.new  #tweetモデルに新しくデータを追加している
+    @user = current_user
   end
 
   # createアクション

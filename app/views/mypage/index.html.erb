@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mypage</title>
-    <link rel="stylesheet" href="mypage.scss">
+    <link rel="stylesheet" href="mypages.scss">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Potta+One&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
-    <h1 class="logo">StudyHack</h1>
+  <header class="head">
+    <h1 class="logo">StudyDiary</h1>
       <% if user_signed_in? %>
         <%= link_to  mypage_index_path(current_user.id) do%>
           <% if @user.image.attached? %>
@@ -20,8 +23,9 @@
       <% end %>
   </header>
 
-  <main class="main-content">
+  <main class="main-content-mypage">
     <%# 残り日数の表示 %>
+    <%# <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %> 
   <p>
     <% if @deadline.present? %>
       <p class="deadline_string">受験本番まで</p> 
@@ -44,6 +48,8 @@
     </div>
   </p>
 
-  
-  <p><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %> </p>
+  <footer>
+     <small>© 2024 SaitoRinsei @ kinchan</small>
+  </footer>
 </body>
+</html>

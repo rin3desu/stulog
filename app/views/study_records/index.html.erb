@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyHack</title>
+    <title>StudyDiary</title>
     <link rel="stylesheet" href="study_records.scss">
 </head>
 <body>
-  <header class="header">
-    <h1 class="logo">StudyHack</h1>
+  <header class="head">
+    <h1 class="logo">StudyDiary</h1>
       <% if user_signed_in? %>
         <%= link_to  mypage_index_path(current_user.id) do%>
           <% if @user.image.attached? %>
@@ -56,8 +56,8 @@
               <div class="Studyrecord"><%= record.updated_at %></div>
             </div>
           </p>
-          <%= link_to "編集", edit_study_record_path(record) %> 
-          <%= button_to "削除", study_record_path(record), method: :delete %>
+          <%# <%= link_to "編集", edit_study_record_path(record) %>  
+          <%# <%= button_to "削除", study_record_path(record), method: :delete %> 
         </li>
       <% end %>
     </section>
@@ -86,4 +86,7 @@
       </div>
     </aside>
   </main>
+  <footer>
+     <small>© 2024 SaitoRinsei @ kinchan</small>
+  </footer>
 </body>

@@ -15,7 +15,9 @@ class StudyRecordsController < ApplicationController
   end
 
   def new
+    @user = current_user
     @study_record = StudyRecord.new
+    @sections = [] # 初期状態では空
   end
 
   def create
@@ -32,6 +34,7 @@ class StudyRecordsController < ApplicationController
   end
 
   def edit
+    @user = current_user
     @study_record = StudyRecord.find(params[:id])
   end
 

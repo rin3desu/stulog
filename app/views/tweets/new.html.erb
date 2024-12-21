@@ -1,40 +1,74 @@
-<h1>模試の結果</h1>
-<h3>反省ページ</h3>
-<%= form_for @tweet do |f| %>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyDiary</title>
+    <link rel="stylesheet" href="tweets.scss">
+</head>
+<body>
+  <header class="head">
+    <h1 class="logo">StudyDiary</h1>
+      <% if user_signed_in? %>
+        <%= link_to  mypage_index_path(current_user.id) do%>
+          <% if @user.image.attached? %>
+            <%= image_tag  @user.image,class: "user_image" %>
+          <% else %>
+            <%= image_tag "C:/GeekWeb/product/studysite/app/assets/images/pro1.png" ,class:"user_image"%>
+          <% end %>
+        <% end %>
+      <% end %>
+  </header>
+  <h1 class="h1-newtweet">模試の結果を記録する</h1>
+  <main class = "main-container-newTweets">
+    <%= form_for @tweet do |f| %>
+      <%# データ型がstringで自由記述の入力フォーム %>
+      <div class="field">
+        <div class="heading"><%= f.label :"模試の名前" %></div>
+        <div class="TweetRecord"><%= f.text_field :test, :size => 10 %></div>
+      </div>
 
-  <%# データ型がstringで自由記述の入力フォーム %>
-  <div class="field">
-    <%= f.label :"模試の種類" %>
-    <%= f.text_field :test, :size => 30 %>
-  </div>
+      <%# データ型がstringで選択式の入力フォーム %>
+      <div class="field">
+        <div class="heading"><%= f.label :"教科" %></div>
+        <div class="TweetRecord"><%= f.select :subject, 
+         [["英語", "英語"], 
+              ["数学", "数学"], 
+              ["化学", "化学"],
+              ["物理", "物理"],
+              ["生物","生物"],
+              ["国語","国語"],
+              ["日本史","世界史"],
+              ["世界史","世界史"],
+              ["地理","地理"],
+              ["現代社会","現代社会"]], 
+              include_blank: "選択して下さい" %>
+        </div>
+      </div>
 
-  <%# データ型がstringで選択式の入力フォーム %>
-  <div class="field">
-    <%= f.label :"教科" %>
-    <%= f.select :subject, 
-    [["英語", "英語"], 
-    ["数学", "数学"], 
-    ["化学", "化学"]], include_blank: "選択して下さい" %>
-  </div>
+      <%# データ型がstringで自由記述の入力フォーム %>
+      <div class="field">
+        <div class="heading"><%= f.label :"単元名" %></div>
+        <div class="TweetRecord"><%= f.text_field :section, :size => 15 %></div>
+      </div>
 
-  <%# データ型がstringで自由記述の入力フォーム %>
-  <div class="field">
-    <%= f.label :"単元名" %>
-    <%= f.text_field :section, :size => 30 %>
-  </div>
+      <%# データ型がtextで自由記述の入力フォーム %>
+      <div class="field">
+        <div class="heading"><%= f.label :"感想"  %></div>
+        <div class="TweetRecord"><%= f.text_area :comment, :size => "30x6" %></div>
+      </div>
 
-  <%# データ型がtextで自由記述の入力フォーム %>
-  <div class="field">
-    <%= f.label :"感想"  %>
-    <%= f.text_area :comment, :size => "30x6" %>
-  </div>
+      <div class="field">
+        <div class="heading"><%= f.label :"記録" %></div>
+        <div class="TweetRecord"><%= f.file_field :image %></div>
+      </div>
 
-  <div class="field">
-    <%= f.label :"記録" %>
-    <%= f.file_field :image %>
-  </div>
+      <p class="Record"><%= f.submit "記録する", class: "newTweet" %></p>
+    <% end %>
 
-  <%= f.submit "記録する" %>
-<% end %>
-
-<%= link_to "一覧に戻る", tweets_path %>
+    <%= link_to "一覧に戻る", tweets_path %>
+  </main>
+  <footer>
+     <small>© 2024 SaitoRinsei @ kinchan</small>
+  </footer>
+</body>

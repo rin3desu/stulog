@@ -1,42 +1,75 @@
-<h1>勉強記録</h1>
-<h3>今回の記録</h3>
-<%= form_for @study_record do |f| %>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyDiary</title>
+    <link rel="stylesheet" href="study_records.scss">
+</head>
+<body>
+  <header class="head">
+    <h1 class="logo">StudyDiary</h1>
+      <% if user_signed_in? %>
+        <%= link_to  mypage_index_path(current_user.id) do%>
+          <% if @user.image.attached? %>
+            <%= image_tag  @user.image,class: "user_image" %>
+          <% else %>
+            <%= image_tag "C:/GeekWeb/product/studysite/app/assets/images/pro1.png" ,class:"user_image"%>
+          <% end %>
+        <% end %>
+      <% end %>
+  </header>
 
-  <%# データ型がstringで自由記述の入力フォーム %>
-  <div class="field">
-    <%= f.label :"科目" %>
-   <%= f.select :subject, 
-    [["英語", "英語"], 
-    ["数学", "数学"], 
-    ["化学", "化学"],
-    ["物理", "物理"],
-    ["生物","生物"],
-    ["国語","国語"],
-    ["日本史","世界史"],
-    ["世界史","世界史"],
-    ["地理","地理"],
-    ["現代社会","現代社会"]], include_blank: "選択して下さい" %>
-  </div>
+  <h1 class="h1-newtweet">新しい記録</h1>
+  <main class="main-container-newStudy">        
+      <%= form_for @study_record do |f| %>
 
-  <%# データ型がstringで選択式の入力フォーム %>
-  <div class="field">
-    <%= f.label :"単元" %>
-    <%= f.text_field :section, :size => 30 %>
-  </div>
+        <%# データ型がstringで自由記述の入力フォーム %>
+        <div class="field">
+            <div class="heading"><%= f.label :"科目" %></div>
+            <div class="Studyrecord">
+              <%= f.select :subject, 
+              [["英語", "英語"], 
+              ["数学", "数学"], 
+              ["化学", "化学"],
+              ["物理", "物理"],
+              ["生物","生物"],
+              ["国語","国語"],
+              ["日本史","世界史"],
+              ["世界史","世界史"],
+              ["地理","地理"],
+              ["現代社会","現代社会"]], 
+              include_blank: "選択して下さい" %>
+          </div>
+        </div>
 
-  <%# データ型がIntegerの勉強時間の入力フォーム %>
-  <div class="field">
-    <%= f.label :"勉強時間" %>
-    <%= f.number_field :time, step: 0.1 %>
-  </div>
+        <%# データ型がstringで選択式の入力フォーム %>
+        <div class="field">
+            <div class="heading"><%= f.label :"単元" %></div>
+            <div class="Studyrecord"><%= f.text_field :section, :size => 15 %></div>
+        </div>
 
-  <%# データ型がtextで自由記述の入力フォーム %>
-  <div class="field">
-    <%= f.label :"感想"  %>
-    <%= f.text_area :comment, :size => "30x6" %>
-  </div>
+        <%# データ型がIntegerの勉強時間の入力フォーム %>
+        <div class="field">
+            <div class="heading"><%= f.label :"勉強時間" %></div>
+            <div class="Studyrecord"><%= f.number_field :time, step: 0.1 %></div>
+        </div>
 
-  <%= f.submit "記録する" %>
-<% end %>
+        <%# データ型がtextで自由記述の入力フォーム %>
+        <div class="field">
+            <div class="heading"><%= f.label :"感想"  %></div>
+            <div class="Studyrecord"><%= f.text_area :comment, :size => "30x6" %></div>
+        </div>
 
-<%= link_to "一覧に戻る", study_records_path %>
+        <p class="Record"><%= f.submit "記録する",class: "newrecord" %></p>
+      <% end %>
+
+      <%= link_to "一覧に戻る", study_records_path %>
+  </main>
+  <footer>
+     <small>© 2024 SaitoRinsei @ kinchan</small>
+  </footer>
+</body>
+
+
+

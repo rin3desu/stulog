@@ -1,3 +1,241 @@
 // Place all the styles related to the tweets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  background-color: #9fcbef;
+  background-image: url("C:/GeekWeb/product/studysite/app/assets/images/notebook.png");
+}
+.kiwi-maru-regular {
+  font-family: "Kiwi Maru", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.head {
+  background-color: #FFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding: 10px; 
+  margin-left: 15px;
+  margin-right: 15px;  
+  // border: solid;
+  // border-color: #4161ef;
+  // border-width: 4px;
+  // border-top: transparent;
+  // border-left: transparent;
+  // border-right: transparent;
+  
+}
+
+.logo {
+  margin-left: 10px;
+  font-size: 30px;
+  font-family: "Kiwi Maru";
+  font-weight: bold;
+  color: black;
+  border: solid;
+  border-color: #4161ef;
+  border-width: 4px;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  
+}
+
+.user_image{
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.main-container-Tweets{
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+  font-family: "Kiwi Maru", serif;  padding: 10px;
+}
+
+
+/* リスト全体の中央揃え */
+.tweet-list {
+  display: flex;
+  flex-wrap: wrap; /* 折り返しを逆方向にする */
+  flex-direction: row; /* アイテムの表示順を逆にする */
+  list-style: none;
+  margin: 0 auto; /* 水平方向中央 */
+  padding: 0;
+  justify-content: flex-start;
+}
+
+/* 各アイテム */
+.tweet-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 380px; /* アイテムの幅を固定 */
+  padding: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 15px;
+  border-radius: 10px;
+  box-shadow:
+    2px 2px 0px #4161ef,
+    -2px -2px 0px #4161ef,
+    1px -1px 0px #4161ef,
+    -1px 1px 0px #4161ef;
+}
+
+.tweets-container {
+  display: flex; /* 横並びにする */
+  align-items: center; /* 垂直方向で中央揃え */
+  margin: 10px 0;
+
+  .user-icon {
+    flex: 0 0 40px; /* アイコンのサイズ指定 */
+    margin-right: 30px;
+
+    img {
+      width: 60px; /* アイコンの幅 */
+      height: 60px;
+      border-radius: 50%; /* 円形にする */
+      object-fit: cover; /* 画像を枠に合わせる */
+    }
+  }
+
+  .tweet-details {
+    display: flex;
+    flex-direction: column; /* 縦方向に並べる */
+    justify-content: center;
+    text-align: left;
+    margin-left: 10px;
+
+    p {
+      margin: 5px 0; /* テキスト間の余白 */
+      font-size: 18px;
+      strong {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+.tweet-content {
+  width: 100%;
+}
+
+/* テキスト部分 */
+
+.tweet-content strong {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* アップロードした画像の配置 */
+.tweet-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* 幅いっぱいに広げる */
+  margin-top: 15px;
+}
+
+.tweet-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.comment-head{
+  margin-top: 20px;
+  font-weight: 500;
+  text-align: left;
+  padding-left: 20px;
+  font-size: 30px;
+}
+
+.comment{
+  margin: 5px 0; /* テキスト間の余白 */
+  font-size: 18px;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.h1-newtweet{
+  margin-top: 10px;
+  text-align: center;
+  font-family: "Kiwi Maru", serif;  padding: 10px;
+}
+
+.main-container-newTweets{
+  width: 40%;
+  margin-top: 20px;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: "Kiwi Maru", serif;  padding: 10px;
+  box-shadow:
+  2px 2px 0px #022ef3, 
+  -2px -2px 0px #022ef3, 
+  1px -1px 0px #022ef3,
+  -1px 1px 0px #022ef3;
+}
+
+.field{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px
+}
+
+.newTweet{
+  display: inline-block;
+  background-color: #415cf0; /* ボタンの赤色 */
+  color: #fff; /* 文字色（白） */
+  text-decoration: none; /* リンクの下線を消す */
+  font-size: 16px; /* 文字サイズ */
+  font-weight: bold; /* 太字 */
+  text-align: center; /* 文字を中央に配置 */
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 10px 20px; /* ボタンの内側の余白 */
+  border-radius: 50px; /* 丸みを持たせる */
+  position: relative; /* アイコンを配置するために必要 */
+  box-shadow: 0 4px #03249b; /* 影をつける */
+  transition: all 0.2s ease-in-out; /* ホバー時のアニメーション */
+}
+
+.newTweet:hover {
+  transform: translateY(-2px); /* ホバー時に少し浮き上がる */
+  box-shadow: 0 6px #87b9f6; /* 影を少し伸ばす */
+}
+
+.newTweet:active {
+  transform: translateY(2px); /* クリック時に沈む */
+  box-shadow: 0 2px #f8b04b; /* 影を縮める */
+}
+
+/* ボタン内の矢印 */
+.newTweet::after {
+  content: "➔"; /* 矢印を表示 */
+  font-size: 16px; /* 矢印のサイズ */
+  margin-left: 10px; /* 文字との間に余白を追加 */
+  position: relative;
+  top: 1px; /* 矢印を微調整 */
+}
+
+
+
+
