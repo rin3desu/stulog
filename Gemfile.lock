@@ -277,6 +277,7 @@ PLATFORMS
 DEPENDENCIES
   activestorage-cloudinary-service
   bootsnap (>= 1.4.4)
+  bundler (>= 2.6.6)
   byebug
   capybara (>= 3.26)
   chartkick
@@ -301,4 +302,4 @@ RUBY VERSION
    ruby 3.1.6p260
 
 BUNDLED WITH
-   2.2.33
+   2.6.6
