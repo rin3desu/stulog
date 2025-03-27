@@ -25,5 +25,9 @@
   "scripts": {
     "webpack": "webpack --config config/webpack.config.js",
     "start": "webpack-dev-server --mode development"
+  },
+  "engines": {
+    "node": "14.x",
+    "yarn": "1.22.x"
   }
 }
