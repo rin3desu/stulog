@@ -109,6 +109,7 @@ GEM
       multipart-post (~> 2)
     faraday-net_http (3.3.0)
       net-http
+    ffi (1.17.0-x64-mingw-ucrt)
     ffi (1.17.0-x64-mingw32)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -146,10 +147,13 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.4)
+    nokogiri (1.16.7-x64-mingw-ucrt)
+      racc (~> 1.4)
     nokogiri (1.16.7-x64-mingw32)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.1)
+    pg (1.5.9-x64-mingw-ucrt)
     pg (1.5.9-x64-mingw32)
     public_suffix (6.0.1)
     puma (5.6.9)
@@ -199,6 +203,8 @@ GEM
     rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     sassc (2.4.0-x64-mingw32)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -221,6 +227,7 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
+    sqlite3 (1.7.3-x64-mingw-ucrt)
     sqlite3 (1.7.3-x64-mingw32)
     thor (1.3.2)
     tilt (2.4.0)
@@ -258,6 +265,7 @@ GEM
     zeitwerk (2.6.18)
 
 PLATFORMS
+  x64-mingw-ucrt
   x64-mingw32
 
 DEPENDENCIES
@@ -284,7 +292,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 3.0.7p220
+   ruby 3.1.6p260
 
 BUNDLED WITH
    2.2.33
