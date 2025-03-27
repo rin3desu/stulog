@@ -2,14 +2,11 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.6'
-platforms :x86_64_linux, :x64_mingw32 do
-end
 
 # Railsのバージョン設定
 gem 'rails', '~> 6.1.7', '>= 6.1.7.10'
 
 # 使用するデータベースと関連gem
-# 開発環境ではsqlite3を利用し、Production環境ではpg（PostgreSQL）を利用
 gem 'pg', group: :production
 gem 'sqlite3', group: :development
 
@@ -28,7 +25,6 @@ gem 'bundler', '>= 2.6.6'
 
 # 開発環境、テスト環境向けgem
 group :development, :test do
-  gem 'sqlite3'  # 開発環境ではsqlite3を利用
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
@@ -60,8 +56,4 @@ gem 'activestorage-cloudinary-service'
 
 # グラフ描画ライブラリ
 gem 'chartkick'
-
-# 本番環境用のpg設定
-group :production do
-  gem 'pg'
-end
+gem 'bootsnap', require: false
