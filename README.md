@@ -1,24 +1,14 @@
 # README
+この勉強記録を作成することのできるWebサイトになります。
+使用言語はHTML,CSS,Ruby,JavaScriptで、フレームワークとしてRailsを使用しています
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+主な機能は以下のようになります
+・勉強記録
+教科ごとの勉強記録を画像とともにすることができます。また、勉強記録の中から各教科の勉強時間を視覚的にとらえることができるようにしています
+・模試記録
+勉強記録とは別に模試の反省等を含めた記録をすることができます
+・Youtube
+受験勉強に役立つ参考動画を厳選し、Youtubeに飛べるようにしています
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+2025/03/30現在
+Herokuにて公開をしようとしているのですが、デプロイに苦戦している最中です。
