@@ -12,3 +12,6 @@
 
 2025/03/30現在
 Herokuにて公開をしようとしているのですが、デプロイに苦戦している最中です。
+
+デモ動画があるのでそちらをご覧ください
+https://www.youtube.com/watch?v=dIdrLAKlCy0
