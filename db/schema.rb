@@ -77,15 +77,6 @@ ActiveRecord::Schema.define(version: 2024_11_30_053316) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "missions", force: :cascade do |t|
-    t.integer "user_id"
-    t.text "content"
-    t.string "penalty"
-    t.datetime "deadline"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "study_records", force: :cascade do |t|
     t.string "subject"
     t.string "section"

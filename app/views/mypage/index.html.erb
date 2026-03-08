@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mypage</title>
-    <link rel="stylesheet" href="mypages.scss">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Potta+One&display=swap" rel="stylesheet">
-</head>
-<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Potta+One&display=swap" rel="stylesheet">
+
+<div class="mypage-wrapper">
+  
   <header class="head">
     <h1 class="logo">StudyDiary</h1>
       <% if user_signed_in? %>
-        <%= link_to  mypage_index_path(current_user.id) do%>
+        <%= link_to mypage_index_path(current_user.id) do %>
           <% if @user.image.attached? %>
-            <%= image_tag  @user.image,class: "user_image" %>
+            <%= image_tag @user.image, class: "user_image" %>
           <% else %>
-            <%= image_tag "C:/GeekWeb/product/studysite/app/assets/images/pro1.png" ,class:"user_image"%>
+            <%= image_tag "pro1.png", class: "user_image" %>
           <% end %>
         <% end %>
       <% end %>
@@ -26,30 +20,31 @@
   <main class="main-content-mypage">
     <%# 残り日数の表示 %>
     <%# <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %> 
-  <p>
-    <% if @deadline.present? %>
-      <p class="deadline_string">2025年度共通テスト本番まで</p> 
-      <p class="deadline_string2"><%= @remaining_days %>日</p>
-    <% else %>
-      <p class="deadline_string">目標日は設定されていません。</p>
-    <% end %>
-  </p>
-  <p>
+    
+    <div class="deadline-container">
+      <% if @deadline.present? %>
+        <p class="deadline_string">2025年度共通テスト本番まで</p> 
+        <p class="deadline_string2"><%= @remaining_days %>日</p>
+      <% else %>
+        <p class="deadline_string">目標日は設定されていません。</p>
+      <% end %>
+    </div>
+  
     <div class="options">
       <div class="content">
-        <%= link_to image_tag("C:/GeekWeb/product/studysite/app/assets/images/studylecord.png"), study_records_path, class:"content" %>
+        <%= link_to image_tag("studylecord.png"), study_records_path, class:"content" %>
       </div>
       <div class="content">
-        <%= link_to image_tag("C:/GeekWeb/product/studysite/app/assets/images/testlog.png"), tweets_path %>
+        <%= link_to image_tag("testlog.png"), tweets_path %>
       </div>
       <div class="content">
-        <%= link_to image_tag("C:/GeekWeb/product/studysite/app/assets/images/motivate.png"), youtubes_path %>
+        <%= link_to image_tag("motivate.png"), youtubes_path %>
       </div>
     </div>
-  </p>
+  </main>
 
   <footer>
      <small>© 2024 SaitoRinsei @ kinchan</small>
   </footer>
-</body>
-</html>
+
+</div>

@@ -7,12 +7,23 @@
   box-sizing: border-box;
 }
 
-body {
+/* body ではなく .mypage-wrapper に変えます */
+.mypage-wrapper {
   font-family: Arial, sans-serif;
   color: #333;
   line-height: 1.6;
   background-color: #9fcbef;
-  background-image: url("C:/GeekWeb/product/studysite/app/assets/images/notebook.png");
+  background-image: image-url("notebook.png");
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* これでフッターが下に押し出されます！ */
+}
+
+.main-content-mypage {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* メインコンテンツに余白を埋めさせます */
 }
 .kiwi-maru-regular {
   font-family: "Kiwi Maru", serif;
@@ -59,11 +70,6 @@ body {
   border-radius: 50%;
 }
 
-.main-content-mypage{
-  display: flex;
-  flex-direction: column;
-  padding: auto;
-}
 
 .deadline_string{
   margin-top: 30px;

@@ -3,57 +3,53 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.6'
 
-# Railsのバージョン設定
+# Rails本体
 gem 'rails', '~> 6.1.7', '>= 6.1.7.10'
 
-# 使用するデータベースと関連gem
+# データベース
 gem 'pg', group: :production
-gem 'sqlite3', group: :development
+gem 'sqlite3', '~> 1.4', group: [:development, :test]
 
-# アプリケーションサーバーやスタイルシートの設定
+# アプリケーションサーバーやスタイルシート
 gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 
-# JavaScript関連の設定（webpackerまたはjsbundling-rails）
-gem 'webpacker', '~> 5.0'  # 現在の設定を維持
-# gem 'jsbundling-rails', '~> 1.0'  # jsbundling-railsに切り替える場合
+# JavaScript管理
+gem 'webpacker', '~> 5.0'  # Rails 6 で使用
 
-# その他の機能追加
+# その他機能
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
-gem 'bundler', '>= 2.6.6'
+gem 'bootsnap', require: false
 
-# 開発環境、テスト環境向けgem
+# ユーザー認証
+gem 'devise'
+
+# 環境変数管理（開発・テストのみ）
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
-# 開発環境のみのgem
+# 開発環境のみ
 group :development do
   gem 'web-console', '>= 4.1.0'
   gem 'rack-mini-profiler', '~> 2.0'
 end
 
-# テスト環境のみのgem
+# テスト環境のみ
 group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   gem 'webdrivers'
 end
 
-# Windows環境向けtzinfo-dataの対応
+# Windows 環境向け
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-# ユーザー認証にDeviseを使用
-gem 'devise'
-
-# 環境変数を管理
-gem 'dotenv-rails'
 
 # クラウドサービス関連
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
 
-# グラフ描画ライブラリ
+# グラフ描画
 gem 'chartkick'
-gem 'bootsnap', require: false

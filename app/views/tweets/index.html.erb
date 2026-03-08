@@ -14,7 +14,7 @@
           <% if @user.image.attached? %>
             <%= image_tag  @user.image,class: "user_image" %>
           <% else %>
-            <%= image_tag "C:/GeekWeb/product/studysite/app/assets/images/pro1.png" ,class:"user_image"%>
+            <%= image_tag "pro1.png" ,class:"user_image"%>
           <% end %>
         <% end %>
       <% end %>
@@ -33,7 +33,7 @@
                 <% if t.user.image.attached? %>
                     <%= image_tag  t.user.image, size: '50x50', alt: 'user_icon'%>
                 <% else %>
-                    <%= image_tag "C:/GeekWeb/product/studysite/app/assets/images/pro1.png" ,class:"user-image"%>
+                    <%= image_tag "pro1.png" ,class:"user-image"%>
                 <% end %>
               </div>
 
