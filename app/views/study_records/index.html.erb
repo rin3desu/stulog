@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyDiary</title>
-    <link rel="stylesheet" href="study_records.scss">
-</head>
-<body>
-  <header class="head">
+<header class="head">
     <h1 class="logo">StudyDiary</h1>
       <% if user_signed_in? %>
         <%= link_to  mypage_index_path(current_user.id) do%>
@@ -89,4 +80,3 @@
   <footer>
      <small>© 2024 SaitoRinsei @ kinchan</small>
   </footer>
-</body>

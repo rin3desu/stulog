@@ -1,5 +1,5 @@
 // app/javascript/packs/study_chart.js
-import { Chart } from 'chart.js';
+import Chart from 'chart.js/auto';
 
 document.addEventListener('DOMContentLoaded', function () {
   const chartData = JSON.parse(document.getElementById('chart-data').dataset.chart);
