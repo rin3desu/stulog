@@ -3,15 +3,21 @@ Rails.application.routes.draw do
   devise_for :users
   get 'mypage/index' => 'mypage#index'
 
-  resources :deadline, only: [:new, :show,:create]
+  resources :deadline, only: [:new, :show, :create]
   resources :users, only: [:show]
   get 'hello/index' => 'hello#index'
   root 'hello#index'
 
   resources :tweets do
     resources :likes, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy]
   end
+
   resources :youtubes
-  resources :study_records
+
+  resources :study_records do
+    resources :study_record_likes, only: [:create, :destroy]
+    resources :study_record_comments, only: [:create, :destroy]
+  end
 
 end

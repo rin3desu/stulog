@@ -1,0 +1,89 @@
+<header class="head">
+  <h1 class="logo">StudyDiary</h1>
+  <% if user_signed_in? %>
+    <%= link_to mypage_index_path(current_user.id) do %>
+      <% if current_user.image.attached? %>
+        <%= image_tag current_user.image, class: "user_image" %>
+      <% else %>
+        <%= image_tag "pro1.png", class: "user_image" %>
+      <% end %>
+    <% end %>
+  <% end %>
+</header>
+
+<main class="main-container-show">
+  <div class="show-card">
+    <h2>勉強記録の詳細</h2>
+
+    <div class="datarow"><div class="heading">科目名</div><div class="Studyrecord"><%= @study_record.subject %></div></div>
+    <div class="datarow"><div class="heading">単元名</div><div class="Studyrecord"><%= @study_record.section %></div></div>
+    <div class="datarow"><div class="heading">勉強時間</div><div class="Studyrecord"><%= @study_record.time %>min</div></div>
+    <div class="datarow"><div class="heading">感想</div><div class="Studyrecord"><%= @study_record.comment %></div></div>
+    <div class="datarow"><div class="headingTime">投稿者</div><div class="Studyrecord"><%= @study_record.user&.name || "不明" %></div></div>
+    <div class="datarow"><div class="headingTime">投稿日時</div><div class="Studyrecord"><%= @study_record.updated_at.strftime("%Y/%m/%d %H:%M") %></div></div>
+
+    <div class="tweet-actions">
+      <% if user_signed_in? %>
+        <% if @study_record.already_liked_by?(current_user) %>
+          <%= button_to study_record_study_record_like_path(@study_record, @study_record),
+              method: :delete, class: "like-btn liked" do %>
+            <i class="fa-solid fa-heart"></i> <%= @study_record.study_record_likes.count %> いいね
+          <% end %>
+        <% else %>
+          <%= button_to study_record_study_record_likes_path(@study_record),
+              method: :post, class: "like-btn" do %>
+            <i class="fa-regular fa-heart"></i> <%= @study_record.study_record_likes.count %> いいね
+          <% end %>
+        <% end %>
+      <% else %>
+        <span class="like-count"><i class="fa-solid fa-heart"></i> <%= @study_record.study_record_likes.count %> いいね</span>
+      <% end %>
+    </div>
+
+    <% if user_signed_in? && @study_record.user == current_user %>
+      <div class="owner-actions">
+        <%= link_to "編集する", edit_study_record_path(@study_record), class: "edit-btn" %>
+        <%= button_to "削除する", study_record_path(@study_record), method: :delete,
+            data: { confirm: "本当に削除しますか？" }, class: "delete-btn" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="comments-section">
+    <h3>コメント (<%= @comments.size %>件)</h3>
+
+    <% @comments.each do |comment| %>
+      <div class="comment-item">
+        <div class="comment-header">
+          <% if comment.user.image.attached? %>
+            <%= image_tag comment.user.image, class: "comment-avatar" %>
+          <% else %>
+            <%= image_tag "pro1.png", class: "comment-avatar" %>
+          <% end %>
+          <strong><%= comment.user.name %></strong>
+          <small><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></small>
+          <% if user_signed_in? && comment.user == current_user %>
+            <%= button_to "削除", study_record_study_record_comment_path(@study_record, comment),
+                method: :delete, class: "delete-comment-btn" %>
+          <% end %>
+        </div>
+        <p class="comment-body"><%= comment.content %></p>
+      </div>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <div class="comment-form">
+        <h4>コメントを投稿する</h4>
+        <%= form_for [@study_record, @new_comment] do |f| %>
+          <%= f.text_area :content, placeholder: "コメントを入力してください...", class: "comment-textarea" %>
+          <%= f.submit "投稿する", class: "comment-submit-btn" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "一覧に戻る", study_records_path, class: "back-link" %>
+</main>
+<footer>
+  <small>© 2024 SaitoRinsei @ kinchan</small>
+</footer>

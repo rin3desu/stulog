@@ -196,6 +196,15 @@ body {
   margin-bottom: 10px;
   text-align: center;
 }
+
+/* いいね・コメントアクション (study_records) */
+.record-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  margin-top: 8px;
+}
 .h1-newtweet{
   margin-top: 10px;
   text-align: center;

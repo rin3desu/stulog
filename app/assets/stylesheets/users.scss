@@ -59,3 +59,74 @@
 .Login:hover {
   background-color: #9cadfd6f;
 }
+
+.main-content-signup {
+  width: 45%;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  text-align: center;
+  background-image: image-url("notebook.png");
+  font-family: "Kiwi Maru", serif;
+  padding: 20px;
+  box-shadow:
+    2px 2px 0px #BBB7B2,
+    -2px -2px 0px #BBB7B2,
+    1px -1px 0px #BBB7B2,
+    -1px 1px 0px #BBB7B2;
+}
+
+.main-content-signup h2 {
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.main-content-signup h3 {
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.main-content-signup small {
+  font-size: 13px;
+  color: #666;
+}
+
+.main-content-signup input[type="text"],
+.main-content-signup input[type="email"],
+.main-content-signup input[type="password"],
+.main-content-signup textarea {
+  width: 100%;
+  padding: 8px;
+  font-family: "Kiwi Maru", serif;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.main-content-signup .field {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.delete-account-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #e55;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Kiwi Maru", serif;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.devise-link {
+  display: inline-block;
+  margin: 5px;
+  color: #4161ef;
+  font-family: "Kiwi Maru", serif;
+  font-size: 14px;
+  text-decoration: underline;
+}

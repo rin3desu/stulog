@@ -1,27 +1,24 @@
 class StudyRecordsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @user = current_user
-    @study_records = StudyRecord.all
-
-    # 科目ごとの合計時間を計算
-    @total_time_by_subject = @study_records.group(:subject).sum(:time)
-
-    # 総勉強時間を計算
-    @total_study_time = @study_records.sum(:time)
-
-      # Chart.js用のデータ
+    @study_records = StudyRecord.all.includes(:user, :study_record_likes, :study_record_comments)
+    @total_time_by_subject = StudyRecord.group(:subject).sum(:time)
+    @total_study_time = StudyRecord.sum(:time)
     @chart_data = @total_time_by_subject.map { |subject, time| { subject: subject, time: time } }.to_json
-
+    @liked_record_ids = current_user.study_record_likes.pluck(:study_record_id)
   end
 
   def new
     @user = current_user
     @study_record = StudyRecord.new
-    @sections = [] # 初期状態では空
+    @sections = []
   end
 
   def create
     @study_record = StudyRecord.new(study_record_params)
+    @study_record.user = current_user
     if @study_record.save
       redirect_to study_records_path, notice: "勉強記録を追加しました。"
     else
@@ -31,6 +28,8 @@ class StudyRecordsController < ApplicationController
 
   def show
     @study_record = StudyRecord.find(params[:id])
+    @comments = @study_record.study_record_comments.includes(:user).order(created_at: :asc)
+    @new_comment = StudyRecordComment.new
   end
 
   def edit

@@ -1,16 +1,25 @@
-<h2>Forgot your password?</h2>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Potta+One&display=swap" rel="stylesheet">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+<body class="login-body">
+  <main class="main-content-login">
+    <h2>パスワードをお忘れの方</h2>
+    <p>登録したメールアドレスを入力してください。パスワードリセット用のメールをお送りします。</p>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+      <div class="field">
+        <h3>メールアドレス</h3>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレスを入力" %>
+      </div>
 
-<%= render "users/shared/links" %>
+      <div class="actions">
+        <%= f.submit "パスワードリセットのメールを送る", class: "Login" %>
+      </div>
+    <% end %>
+
+    <%= render "users/shared/links" %>
+  </main>
+</body>

@@ -1,64 +1,66 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyDiary</title>
-    <link rel="stylesheet" href="tweets.scss">
-</head>
-<body>
-  <header class="head">
-    <h1 class="logo">StudyDiary</h1>
-      <% if user_signed_in? %>
-        <%= link_to  mypage_index_path(current_user.id) do%>
-          <% if @user.image.attached? %>
-            <%= image_tag  @user.image,class: "user_image" %>
-          <% else %>
-            <%= image_tag "pro1.png" ,class:"user_image"%>
-          <% end %>
-        <% end %>
+<header class="head">
+  <h1 class="logo">StudyDiary</h1>
+  <% if user_signed_in? %>
+    <%= link_to mypage_index_path(current_user.id) do %>
+      <% if @user.image.attached? %>
+        <%= image_tag @user.image, class: "user_image" %>
+      <% else %>
+        <%= image_tag "pro1.png", class: "user_image" %>
       <% end %>
-  </header>
+    <% end %>
+  <% end %>
+</header>
 
-  <main class="main-container-Tweets">
-      <h1>模試の振り返り</h1>
-        <%= link_to "新規投稿へ", new_tweet_path, class: "newTweet"%>
-        
-        <ul class = "tweet-list">
-          <% @tweets.each do |t| %>
-          <li class="tweet-item">
-            <div class="tweets-container">
-              <%# ユーザーアイコン %>
-              <div class="user-icon">
-                <% if t.user.image.attached? %>
-                    <%= image_tag  t.user.image, size: '50x50', alt: 'user_icon'%>
-                <% else %>
-                    <%= image_tag "pro1.png" ,class:"user-image"%>
-                <% end %>
-              </div>
+<main class="main-container-Tweets">
+  <h1>模試の振り返り</h1>
+  <%= link_to "新規投稿へ", new_tweet_path, class: "newTweet" %>
 
-              <div class="tweet-details">
-                <p><strong>模試の名前</strong><%= t.test %></p>
-                <p><strong>科目名</strong><%= t.subject %></p>
-                <p><strong>単元名</strong><%= t.section %></p>
-              </div>
-            </div>
-
-            <div class = "tweet-content">
-              <% if t.image.attached? %>
-                <div class="tweet-image">
-                    <%= image_tag t.image, size: '300x200',alt: 't.image'%>
-                </div>
-              <% end %>
-              <p class="comment-head">反省ポイント</p>
-              <p class="comment"><%= t.comment %></p>
-                <%# <%= t.created_at%> 
-
-                <%# <%= link_to "詳細へ", tweet_path(t.id) %>  
-                <%# <%= link_to "編集する", edit_tweet_path(t.id) %> 
-                <%#  <%= button_to "削除する", tweet_path(t.id), method: :delete %>
-            </div>
-          </li>
+  <ul class="tweet-list">
+    <% @tweets.each do |t| %>
+    <li class="tweet-item">
+      <div class="tweets-container">
+        <div class="user-icon">
+          <% if t.user.image.attached? %>
+            <%= image_tag t.user.image, size: '50x50', alt: 'user_icon' %>
+          <% else %>
+            <%= image_tag "pro1.png", class: "user-image" %>
           <% end %>
-        </ul>
-</body>
+        </div>
+
+        <div class="tweet-details">
+          <p><strong>模試の名前</strong><%= t.test %></p>
+          <p><strong>科目名</strong><%= t.subject %></p>
+          <p><strong>単元名</strong><%= t.section %></p>
+        </div>
+      </div>
+
+      <div class="tweet-content">
+        <% if t.image.attached? %>
+          <div class="tweet-image">
+            <%= image_tag t.image, size: '300x200', alt: 't.image' %>
+          </div>
+        <% end %>
+        <p class="comment-head">反省ポイント</p>
+        <p class="comment"><%= t.comment %></p>
+      </div>
+
+      <div class="tweet-actions">
+        <% if user_signed_in? %>
+          <% if @liked_tweet_ids.include?(t.id) %>
+            <%= button_to tweet_like_path(t, t), method: :delete, class: "like-btn liked" do %>
+              <i class="fa-solid fa-heart"></i> <%= t.likes.size %>
+            <% end %>
+          <% else %>
+            <%= button_to tweet_likes_path(t), method: :post, class: "like-btn" do %>
+              <i class="fa-regular fa-heart"></i> <%= t.likes.size %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <span class="like-count"><i class="fa-solid fa-heart"></i> <%= t.likes.size %></span>
+        <% end %>
+        <%= link_to "コメント (#{t.comments.size})", tweet_path(t), class: "comment-link" %>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+</main>

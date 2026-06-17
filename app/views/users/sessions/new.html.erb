@@ -1,13 +1,7 @@
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
-    <link rel="stylesheet" href="users.scss">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Potta+One&display=swap" rel="stylesheet">
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Potta+One&display=swap" rel="stylesheet">
+
 <body class="login-body">
   <main class="main-content-login">
     <h2>ログイン</h2>
@@ -15,13 +9,13 @@
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
-        <h2>メール </h2><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <h3>メールアドレス</h3>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレスを入力" %>
       </div>
 
       <div class="field">
-        <h2>パスワード </h2><br />
-        <%= f.password_field :password, autocomplete: "off" %>
+        <h3>パスワード</h3>
+        <%= f.password_field :password, autocomplete: "off", placeholder: "パスワードを入力" %>
       </div>
 
       <% if devise_mapping.rememberable? -%>
@@ -32,7 +26,7 @@
       <% end -%>
 
       <div class="actions">
-        <%= f.submit "Log in" ,class: "Login"%>
+        <%= f.submit "ログイン", class: "Login" %>
       </div>
     <% end %>
 

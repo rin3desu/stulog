@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_30_053316) do
+ActiveRecord::Schema.define(version: 2026_06_18_100002) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -77,6 +77,25 @@ ActiveRecord::Schema.define(version: 2024_11_30_053316) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "study_record_comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "study_record_id", null: false
+    t.string "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["study_record_id"], name: "index_study_record_comments_on_study_record_id"
+    t.index ["user_id"], name: "index_study_record_comments_on_user_id"
+  end
+
+  create_table "study_record_likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "study_record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["study_record_id"], name: "index_study_record_likes_on_study_record_id"
+    t.index ["user_id", "study_record_id"], name: "index_study_record_likes_on_user_id_and_study_record_id", unique: true
+  end
+
   create_table "study_records", force: :cascade do |t|
     t.string "subject"
     t.string "section"
@@ -84,6 +103,8 @@ ActiveRecord::Schema.define(version: 2024_11_30_053316) do
     t.string "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_study_records_on_user_id"
   end
 
   create_table "tweets", force: :cascade do |t|
