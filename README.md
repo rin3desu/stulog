@@ -1,57 +1,46 @@
 
-**Stulog**
+# Stulog
 
-**概要**
+## 概要
 
 Stulog は、受験生の学習管理とモチベーション維持をサポートするWebアプリケーションです。
 スタディサプリのような学習アプリをイメージしており、以下の機能を提供します：
 
-・教科ごとの学習記録と統計の可視化
+- 教科ごとの学習記録と統計の可視化
+- これまでに受けた模試の保存・振り返り
+- 学習モチベーションを高める勉強系YouTube動画の表示
 
-・これまでに受けた模試の保存・振り返り
-
-・学習モチベーションを高める勉強系YouTube動画の表示
-
-**デモ動画**
-デモ動画があるのでそちらをご覧ください
+## デモ動画
 
 https://www.youtube.com/watch?v=dIdrLAKlCy0
 
-↑クリックするとデモ動画をご覧いただけます
+## 公開URL
 
-**使用技術**
+https://stulog.onrender.com
 
-フロントエンド：HTML, CSS, JavaScript
+## 使用技術
 
-フレームワーク：Ruby on Rails
+| 種別 | 技術 |
+|------|------|
+| フロントエンド | HTML, CSS, JavaScript |
+| フレームワーク | Ruby on Rails |
+| データベース | PostgreSQL（本番） / SQLite（開発） |
+| インフラ | Render |
 
-データベース：SQLite
+## ローカルでの使い方
 
-**使い方**
-
-現在デプロイ最中であるため、ローカルでの使用を想定しています
-
-以下のコマンドをコマンドプロンプト上に入力してください
-
+```bash
 git clone https://github.com/rin3desu/stulog.git
-
 cd stulog
-
 bundle install
-
 rails db:migrate
-
 rails server
-ブラウザで以下にアクセスしてください：
+```
 
-http://localhost:3000
+ブラウザで http://localhost:3000 にアクセスしてください。
 
-**今後の改善予定**
-・最新バージョンの Ruby on Rails での再実装
+## 今後の改善予定
 
-・デプロイ（Heroku など）に再挑戦
-
-・UI/UX の改善
-
-・Youtubeの動画を教科ごとに厳選
-
+- 最新バージョンの Ruby on Rails での再実装
+- UI/UX の改善
+- YouTubeの動画を教科ごとに厳選
