@@ -4,18 +4,7 @@
 
 <div class="mypage-wrapper">
   
-  <header class="head">
-    <h1 class="logo">StudyDiary</h1>
-      <% if user_signed_in? %>
-        <%= link_to mypage_index_path(current_user.id) do %>
-          <% if @user.image.attached? %>
-            <%= image_tag @user.image, class: "user_image" %>
-          <% else %>
-            <%= image_tag "pro1.png", class: "user_image" %>
-          <% end %>
-        <% end %>
-      <% end %>
-  </header>
+  <%= render 'shared/header' %>
 
   <main class="main-content-mypage">
     <%# 残り日数の表示 %>

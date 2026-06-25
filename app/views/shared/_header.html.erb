@@ -1,0 +1,53 @@
+<header class="head">
+  <h1 class="logo">StudyDiary</h1>
+  <% if user_signed_in? %>
+    <div class="user-menu-wrapper">
+      <button class="user-icon-btn" id="userMenuToggle" type="button">
+        <% if current_user.image.attached? %>
+          <%= image_tag current_user.image, class: "user_image" %>
+        <% else %>
+          <%= image_tag "pro1.png", class: "user_image" %>
+        <% end %>
+      </button>
+      <div class="user-dropdown" id="userDropdown">
+        <div class="dropdown-stat">
+          <span class="dropdown-label">フォロー中</span>
+          <strong class="dropdown-count"><%= current_user.following.count %>人</strong>
+        </div>
+        <div class="dropdown-stat">
+          <span class="dropdown-label">フォロワー</span>
+          <strong class="dropdown-count"><%= current_user.followers.count %>人</strong>
+        </div>
+        <% if current_user.admin? %>
+          <hr class="dropdown-divider">
+          <%= link_to "管理者画面へ", youtubes_path, class: "dropdown-admin-link" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</header>
+
+<script>
+  (function () {
+    function initUserMenu() {
+      var toggle = document.getElementById('userMenuToggle');
+      var dropdown = document.getElementById('userDropdown');
+      if (!toggle || !dropdown) return;
+
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+
+      document.addEventListener('click', function () {
+        dropdown.classList.remove('open');
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initUserMenu);
+    } else {
+      initUserMenu();
+    }
+  })();
+</script>
