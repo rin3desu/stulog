@@ -23,11 +23,12 @@
     
     <div class="deadline-container">
       <% if @deadline.present? %>
-        <p class="deadline_string">2025年度共通テスト本番まで</p> 
+        <p class="deadline_string"><%= @deadline.content.present? ? @deadline.content : "試験" %>まで</p>
         <p class="deadline_string2"><%= @remaining_days %>日</p>
       <% else %>
-        <p class="deadline_string">目標日は設定されていません。</p>
+        <p class="deadline_string">試験日が設定されていません</p>
       <% end %>
+      <%= link_to "試験日を設定する", new_deadline_path, class: "set-deadline-btn" %>
     </div>
   
     <div class="options">

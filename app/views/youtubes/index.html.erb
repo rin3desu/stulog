@@ -1,42 +1,44 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyDiary</title>
-    <link rel="stylesheet" href="youtubes.scss">
-</head>
-<body>
-  <header class="head">
-    <h1 class="logo">StudyDiary</h1>
-      <% if user_signed_in? %>
-        <%= link_to  mypage_index_path(current_user.id) do%>
-          <% if @user.image.attached? %>
-            <%= image_tag  @user.image,class: "user_image" %>
-          <% else %>
-            <%= image_tag "pro1.png" ,class:"user_image"%>
-          <% end %>
-        <% end %>
+<header class="head">
+  <h1 class="logo">StudyDiary</h1>
+  <% if user_signed_in? %>
+    <%= link_to mypage_index_path(current_user.id) do %>
+      <% if @user.image.attached? %>
+        <%= image_tag @user.image, class: "user_image" %>
+      <% else %>
+        <%= image_tag "pro1.png", class: "user_image" %>
       <% end %>
-  </header>
-  <h1 class="h1-youtube">おすすめYoutubeチャンネル</h1>
-  <main class="main-container-Youtube">
-    <h2 class="h2-youtube">英語勉強法</h2>
-    <div class = "English-section">
-      <% @youtubes.each do |t| %>
-        <% if t.youtube_url.present? %>
-          <div class="section-item"><iframe width="560" height="315" src="https://www.youtube.com/embed/<%= find_youtube_url(t.youtube_url) %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-        <% end %>
-        
-        <%# <%= link_to "詳細へ", youtube_path(t.id) %>
-        <%# <%= link_to "編集する", edit_youtube_path(t.id) %>
-        <%# <%= button_to "削除する", youtube_path(t.id), method: :delete %>
-      <% end %>
-    </div>
-    <h2 class="h2-youtube">数学勉強法</h2>
-  </main>
-    <footer>
-     <small>© 2024 SaitoRinsei @ kinchan</small>
-  </footer>
-</body>
+    <% end %>
+  <% end %>
+</header>
 
+<h1 class="h1-youtube">おすすめYoutubeチャンネル</h1>
+
+<% if user_signed_in? && current_user.admin? %>
+  <div class="admin-actions">
+    <%= link_to "動画を追加する", new_youtube_path, class: "admin-btn" %>
+  </div>
+<% end %>
+
+<main class="main-container-Youtube">
+  <h2 class="h2-youtube">英語勉強法</h2>
+  <div class="English-section">
+    <% @youtubes.each do |t| %>
+      <% if t.youtube_url.present? %>
+        <div class="section-item">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= find_youtube_url(t.youtube_url) %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <% if user_signed_in? && current_user.admin? %>
+            <div class="video-admin-actions">
+              <%= link_to "編集", edit_youtube_path(t.id), class: "edit-btn" %>
+              <%= button_to "削除", youtube_path(t.id), method: :delete, class: "delete-btn", data: { confirm: "削除しますか？" } %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <h2 class="h2-youtube">数学勉強法</h2>
+</main>
+
+<footer>
+  <small>© 2024 SaitoRinsei @ kinchan</small>
+</footer>

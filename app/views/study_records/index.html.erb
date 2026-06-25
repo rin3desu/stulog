@@ -34,29 +34,21 @@
             <div class="Studyrecord"><%= record.comment %></div>
           </div>
           <div class="datarow">
-            <div class="headingTime">投稿者</div>
-            <div class="Studyrecord"><%= record.user&.name || "不明" %></div>
-          </div>
-          <div class="datarow">
             <div class="headingTime">投稿日時</div>
             <div class="Studyrecord"><%= record.updated_at.strftime("%Y/%m/%d") %></div>
           </div>
 
           <div class="record-actions">
-            <% if user_signed_in? %>
-              <% if @liked_record_ids.include?(record.id) %>
-                <%= button_to study_record_study_record_like_path(record, record),
-                    method: :delete, class: "like-btn liked" do %>
-                  <i class="fa-solid fa-heart"></i> <%= record.study_record_likes.size %>
-                <% end %>
-              <% else %>
-                <%= button_to study_record_study_record_likes_path(record),
-                    method: :post, class: "like-btn" do %>
-                  <i class="fa-regular fa-heart"></i> <%= record.study_record_likes.size %>
-                <% end %>
+            <% if @liked_record_ids.include?(record.id) %>
+              <%= button_to study_record_study_record_like_path(record, record),
+                  method: :delete, class: "like-btn liked" do %>
+                <i class="fa-solid fa-heart"></i> <%= record.study_record_likes.size %>
               <% end %>
             <% else %>
-              <span class="like-count"><i class="fa-solid fa-heart"></i> <%= record.study_record_likes.size %></span>
+              <%= button_to study_record_study_record_likes_path(record),
+                  method: :post, class: "like-btn" do %>
+                <i class="fa-regular fa-heart"></i> <%= record.study_record_likes.size %>
+              <% end %>
             <% end %>
             <%= link_to "コメント (#{record.study_record_comments.size})", study_record_path(record), class: "comment-link" %>
           </div>
@@ -83,6 +75,24 @@
       <canvas id="studyChart" width="400" height="200"></canvas>
       <%= javascript_pack_tag 'study_chart' %>
       <p class="Record"><%= link_to "新しい記録を追加", new_study_record_path, class: "newrecord" %></p>
+    </div>
+
+    <div class="ranking-area">
+      <h2>フォロー内ランキング</h2>
+      <ol class="ranking-list">
+        <% @ranking.each_with_index do |entry, i| %>
+          <li class="ranking-item">
+            <span class="rank-number"><%= i + 1 %>位</span>
+            <span class="rank-name">
+              <%= link_to entry[:user].name, user_path(entry[:user]) %>
+              <% if entry[:user] == current_user %>
+                <span class="rank-me">（自分）</span>
+              <% end %>
+            </span>
+            <span class="rank-time"><%= entry[:total_time] %> min</span>
+          </li>
+        <% end %>
+      </ol>
     </div>
   </aside>
 </main>
