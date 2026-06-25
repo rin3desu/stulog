@@ -1,4 +1,7 @@
 class YoutubesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
+
   def index
     @youtubes = Youtube.all
     @user = current_user
@@ -11,15 +14,16 @@ class YoutubesController < ApplicationController
   def create
     youtube = Youtube.new(youtube_params)
     if youtube.save
-      redirect_to :action => "index"
+      redirect_to action: "index"
     else
-      redirect_to :action => "new"
+      redirect_to action: "new"
     end
   end
 
   def show
     @youtube = Youtube.find(params[:id])
   end
+
   def edit
     @youtube = Youtube.find(params[:id])
   end
@@ -27,9 +31,9 @@ class YoutubesController < ApplicationController
   def update
     youtube = Youtube.find(params[:id])
     if youtube.update(youtube_params)
-      redirect_to :action => "show", :id => youtube.id
+      redirect_to action: "show", id: youtube.id
     else
-      redirect_to :action => "new"
+      redirect_to action: "new"
     end
   end
 
@@ -40,8 +44,12 @@ class YoutubesController < ApplicationController
   end
 
   private
-  def youtube_params
-    params.require(:youtube).permit(:body,:youtube_url)
+
+  def require_admin
+    redirect_to youtubes_path, alert: "管理者のみ実行できます。" unless current_user&.admin?
   end
 
+  def youtube_params
+    params.require(:youtube).permit(:body, :youtube_url)
+  end
 end

@@ -3,11 +3,16 @@ class StudyRecordsController < ApplicationController
 
   def index
     @user = current_user
-    @study_records = StudyRecord.all.includes(:user, :study_record_likes, :study_record_comments)
-    @total_time_by_subject = StudyRecord.group(:subject).sum(:time)
-    @total_study_time = StudyRecord.sum(:time)
+    @study_records = current_user.study_records.includes(:study_record_likes, :study_record_comments).order(created_at: :desc)
+    @total_time_by_subject = current_user.study_records.group(:subject).sum(:time)
+    @total_study_time = current_user.study_records.sum(:time)
     @chart_data = @total_time_by_subject.map { |subject, time| { subject: subject, time: time } }.to_json
     @liked_record_ids = current_user.study_record_likes.pluck(:study_record_id)
+
+    following_user_ids = current_user.following.pluck(:id) + [current_user.id]
+    @ranking = User.where(id: following_user_ids).map do |u|
+      { user: u, total_time: u.study_records.sum(:time) }
+    end.sort_by { |r| -r[:total_time] }
   end
 
   def new
