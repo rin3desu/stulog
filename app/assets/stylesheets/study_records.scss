@@ -62,8 +62,10 @@ body {
 
 .sr-notebook {
   display: flex;
-  width: min(96vw, 1040px);
-  height: min(82vh, 660px);
+  width: 96vw;
+  max-width: 1040px;
+  height: 82vh;
+  max-height: 660px;
   border-radius: 6px;
   box-shadow:
     0 0 0 4px #8a8f99,

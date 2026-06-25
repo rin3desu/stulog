@@ -31,8 +31,9 @@
 /* ── ノートブック本体 ── */
 .notebook {
   display: flex;
-  width: min(92vw, 960px);
-  min-height: min(70vh, 560px);
+  width: 92vw;
+  max-width: 960px;
+  min-height: 560px;
   border-radius: 6px;
   box-shadow:
     0 0 0 4px #8a8f99,
@@ -91,14 +92,14 @@
 }
 
 .exam-name-str {
-  font-size: clamp(16px, 2.2vw, 22px);
+  font-size: 19px;
   font-weight: bold;
   color: #12384d;
   margin-bottom: 4px;
 }
 
 .days-str {
-  font-size: clamp(72px, 10vw, 110px);
+  font-size: 90px;
   font-weight: bold;
   color: #1a2f5e;
   line-height: 1;
@@ -127,12 +128,14 @@
 
 .nav-oval {
   display: block;
-  width: clamp(180px, 55%, 260px);
+  width: 55%;
+  min-width: 180px;
+  max-width: 260px;
   padding: 16px 0;
   border: 3px solid #333;
   border-radius: 60px;
   text-align: center;
-  font-size: clamp(16px, 2vw, 20px);
+  font-size: 18px;
   font-weight: bold;
   font-family: "Kiwi Maru", serif;
   color: #333;
