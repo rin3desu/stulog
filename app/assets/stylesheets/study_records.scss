@@ -14,6 +14,9 @@ body {
   line-height: 1.6;
   background-color: #9fcbef;
   background-image: url("notebook.png");
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 .kiwi-maru-regular {
   font-family: "Kiwi Maru", serif;
@@ -63,11 +66,72 @@ body {
 
 .main-container-Studyindex {
   display: flex;
+  flex: 1;
   max-width: 1200px;
   gap: 20px;
   padding: 20px;
   border-radius: 8px;
   font-family: "Kiwi Maru", serif;
+}
+
+/* ランキング */
+.ranking-area {
+  margin-top: 20px;
+  box-shadow:
+    2px 2px 0px #19eaea,
+    -2px -2px 0px #19eaea,
+    1px -1px 0px #19eaea,
+    -1px 1px 0px #19eaea;
+  padding: 10px;
+
+  h2 {
+    margin-bottom: 10px;
+    font-family: "Kiwi Maru", serif;
+  }
+}
+
+.ranking-list {
+  list-style: none;
+  padding: 0;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #cce8ff;
+  font-family: "Kiwi Maru", serif;
+
+  .rank-number {
+    font-weight: bold;
+    color: #4161ef;
+    min-width: 30px;
+  }
+
+  .rank-name {
+    flex: 1;
+    a { color: #333; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  }
+
+  .rank-me {
+    font-size: 12px;
+    color: #888;
+  }
+
+  .rank-time {
+    color: #4e5cff;
+    font-weight: bold;
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #000;
+  font-size: 14px;
+  color: #fff;
 }
 
 .record-section{

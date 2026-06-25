@@ -88,3 +88,37 @@ body {
   margin-bottom: 10px;
   font-family: "Kiwi Maru", serif;
 }
+
+.main-container-Youtube {
+  flex: 1;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #000;
+  font-size: 14px;
+  color: #fff;
+}
+
+.admin-actions {
+  text-align: right;
+  margin: 10px 20px;
+}
+
+.admin-btn {
+  display: inline-block;
+  padding: 8px 20px;
+  background-color: #415cf0;
+  color: #fff;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: "Kiwi Maru", serif;
+  font-size: 14px;
+}
+
+.video-admin-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
