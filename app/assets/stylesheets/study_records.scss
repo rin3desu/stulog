@@ -1,7 +1,4 @@
 // Place all the styles related to the StudyRecords controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -18,27 +15,16 @@ body {
   display: flex;
   flex-direction: column;
 }
-.kiwi-maru-regular {
-  font-family: "Kiwi Maru", serif;
-  font-weight: 400;
-  font-style: normal;
-}
 
+// ── 共有ヘッダー（new/edit/show で使用） ──
 .head {
-  background-color: #FFF;
+  background-color: #fff;
   display: flex;
   justify-content: space-between;
-  align-items: center; 
-  padding: 10px; 
+  align-items: center;
+  padding: 10px;
   margin-left: 15px;
-  margin-right: 15px;  
-  // border: solid;
-  // border-color: #4161ef;
-  // border-width: 4px;
-  // border-top: transparent;
-  // border-left: transparent;
-  // border-right: transparent;
-  
+  margin-right: 15px;
 }
 
 .logo {
@@ -53,77 +39,324 @@ body {
   border-top: transparent;
   border-left: transparent;
   border-right: transparent;
-  
 }
 
-.user_image{
+.user_image {
   margin-right: 10px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
+// ── index: ノートブックレイアウト ──
 
-.main-container-Studyindex {
+.sr-notebook-wrapper {
+  min-height: 100vh;
   display: flex;
-  flex: 1;
-  max-width: 1200px;
-  gap: 20px;
-  padding: 20px;
-  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  background-color: #c0c8d4;
   font-family: "Kiwi Maru", serif;
+  padding: 60px 20px 20px;
 }
 
-/* ランキング */
-.ranking-area {
-  margin-top: 20px;
+.sr-notebook {
+  display: flex;
+  width: min(96vw, 1040px);
+  height: min(82vh, 660px);
+  border-radius: 6px;
   box-shadow:
-    2px 2px 0px #19eaea,
-    -2px -2px 0px #19eaea,
-    1px -1px 0px #19eaea,
-    -1px 1px 0px #19eaea;
-  padding: 10px;
+    0 0 0 4px #8a8f99,
+    0 12px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
 
-  h2 {
-    margin-bottom: 10px;
-    font-family: "Kiwi Maru", serif;
+.sr-notebook-page {
+  flex: 1;
+  position: relative;
+  background-color: #fff;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 31px,
+    #d4d4d4 31px,
+    #d4d4d4 32px
+  );
+  background-size: 100% 32px;
+  background-position: 0 60px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sr-notebook-spine {
+  width: 8px;
+  flex-shrink: 0;
+  background: linear-gradient(to right, #999, #eee 40%, #eee 60%, #999);
+}
+
+// ── 左ページ ──
+.sr-left-page {
+  padding: 16px 16px 0;
+}
+
+.sr-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 2.5px solid #333;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.sr-page-title {
+  font-size: 17px;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 0.03em;
+}
+
+.sr-new-btn {
+  font-size: 12px;
+  font-family: "Kiwi Maru", serif;
+  color: #fff;
+  background-color: #415cf0;
+  border-radius: 20px;
+  padding: 4px 12px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #2a43c7;
   }
 }
 
-.ranking-list {
-  list-style: none;
-  padding: 0;
+.sr-record-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 16px;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
 }
 
-.ranking-item {
+.sr-empty {
+  color: #aaa;
+  font-size: 14px;
+  text-align: center;
+  padding: 32px 0;
+}
+
+.sr-record-list {
+  list-style: none;
+}
+
+.sr-record-item {
+  padding: 9px 10px;
+  margin-bottom: 3px;
+  border-left: 3px solid #4161ef;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.sr-record-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.sr-subject {
+  font-weight: bold;
+  font-size: 14px;
+  color: #1a2f5e;
+}
+
+.sr-time {
+  font-size: 13px;
+  color: #4161ef;
+  font-weight: bold;
+}
+
+.sr-section-name {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 2px;
+}
+
+.sr-record-comment {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.sr-record-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sr-date {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.sr-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid #cce8ff;
+  gap: 6px;
+}
+
+.sr-like-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: #aaa;
   font-family: "Kiwi Maru", serif;
+  padding: 2px 6px;
+  border-radius: 12px;
+  transition: color 0.2s;
 
-  .rank-number {
+  &.liked { color: #e74c7b; }
+  &:hover { color: #e74c7b; }
+}
+
+.sr-comment-link {
+  font-size: 12px;
+  color: #888;
+  text-decoration: none;
+
+  &:hover { color: #4161ef; }
+}
+
+// ── 右ページ ──
+.sr-right-page {
+  padding: 16px 16px 0;
+}
+
+.sr-right-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 16px;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+}
+
+.sr-section {
+  margin-bottom: 18px;
+}
+
+.sr-section-heading {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #4161ef;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.sr-total-time {
+  font-size: 14px;
+  color: #4161ef;
+  margin-bottom: 8px;
+
+  strong {
+    font-size: 20px;
     font-weight: bold;
-    color: #4161ef;
-    min-width: 30px;
   }
+}
 
-  .rank-name {
-    flex: 1;
-    a { color: #333; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-  }
+#studyChart {
+  max-width: 100%;
+  height: auto !important;
+}
 
-  .rank-me {
-    font-size: 12px;
-    color: #888;
-  }
+.sr-ranking-list {
+  list-style: none;
+}
 
-  .rank-time {
-    color: #4e5cff;
-    font-weight: bold;
-  }
+.sr-ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eef;
+  font-size: 13px;
+  font-family: "Kiwi Maru", serif;
+}
+
+.sr-rank-num {
+  font-weight: bold;
+  color: #4161ef;
+  min-width: 22px;
+  text-align: right;
+}
+
+.sr-rank-name {
+  flex: 1;
+
+  a { color: #333; text-decoration: none; &:hover { text-decoration: underline; } }
+}
+
+.sr-rank-me {
+  font-size: 11px;
+  color: #aaa;
+  margin-left: 4px;
+}
+
+.sr-rank-time {
+  color: #4161ef;
+  font-weight: bold;
+}
+
+// ── new/edit フォーム ──
+.h1-newtweet {
+  margin-top: 10px;
+  text-align: center;
+  font-family: "Kiwi Maru", serif;
+  padding: 10px;
+}
+
+.main-container-newStudy {
+  width: 40%;
+  margin: 10px auto 20px;
+  text-align: center;
+  font-family: "Kiwi Maru", serif;
+  padding: 10px;
+  box-shadow:
+    2px 2px 0px #022ef3,
+    -2px -2px 0px #022ef3,
+    1px -1px 0px #022ef3,
+    -1px 1px 0px #022ef3;
+}
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.newrecord {
+  display: inline-block;
+  background-color: #415cf0;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 50px;
+  position: relative;
+  box-shadow: 0 4px #03249b;
+  transition: all 0.2s ease-in-out;
+
+  &:hover { transform: translateY(-2px); box-shadow: 0 6px #87b9f6; }
+  &:active { transform: translateY(2px); box-shadow: 0 2px #f8b04b; }
+  &::after { content: "➔"; font-size: 16px; margin-left: 10px; position: relative; top: 1px; }
 }
 
 footer {
@@ -133,170 +366,3 @@ footer {
   font-size: 14px;
   color: #fff;
 }
-
-.record-section{
-  width: 60%;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 15px;
-  padding: 10px;
-}
-
-.record-list{
-  display: flex;
-  flex-direction: column-reverse;
-  list-style: none;
-}
-
-.record-list li {
-  align-items: flex-start;
-  gap: 10px;
-  box-shadow:
-  2px 2px 0px #92fcfc, 
-    -2px -2px 0px #92fcfc, 
-    1px -1px 0px #92fcfc,
-    -1px 1px 0px #92fcfc;
-  padding: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.datarow {
-  display: flex; /* 横並びにする */
-  align-items: center; /* 縦方向の中央揃え */
-  gap: 10px; /* 見出しとデータの間に余白を入れる */
-  margin-bottom: 8px; /* 各行の間に余白を追加 */
-}
-
-.heading{
-  font-size: 18px; /* 見出しの文字サイズ */
-  font-weight: bold; /* 太字にする（任意） */
-}
-
-.headingTime{
-  font-size: 14px; /* 見出しの文字サイズ */
-  font-weight: bold; /* 太字にする（任意） */
-}
-
-.Studyrecord{
-  font-size: 18px; /* データ部分の文字サイズ */
-  color: #333; /* 文字色（任意） */
-}
-
-.log-section{
-  width: 40%;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 15px;
-  padding: 10px;
-  font-family: "Kiwi Maru", serif;
-}
-
-.log-section h2{
-  margin-top: 5px;
-  margin-bottom: 15px;
-}
-
-.log-area{
-  box-shadow:
-    2px 2px 0px #19eaea, 
-    -2px -2px 0px #19eaea, 
-    1px -1px 0px #19eaea,
-    -1px 1px 0px #19eaea;
-  padding: 10px;
-}
-
-.log-list{
-  list-style: none;
-  font-family: "Kiwi Maru", serif;
-
-}
-
-.TotalTime{
-  margin-top: 10px;
-  margin-bottom: 10px;
-  color: #4e5cff;
-  font-family: "Kiwi Maru", serif;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.newrecord{
-  display: inline-block;
-  background-color: #415cf0; /* ボタンの赤色 */
-  color: #fff; /* 文字色（白） */
-  text-decoration: none; /* リンクの下線を消す */
-  font-size: 16px; /* 文字サイズ */
-  font-weight: bold; /* 太字 */
-  text-align: center; /* 文字を中央に配置 */
-  padding: 10px 20px; /* ボタンの内側の余白 */
-  border-radius: 50px; /* 丸みを持たせる */
-  position: relative; /* アイコンを配置するために必要 */
-  box-shadow: 0 4px #03249b; /* 影をつける */
-  transition: all 0.2s ease-in-out; /* ホバー時のアニメーション */
-}
-
-.newrecord:hover {
-  transform: translateY(-2px); /* ホバー時に少し浮き上がる */
-  box-shadow: 0 6px #87b9f6; /* 影を少し伸ばす */
-}
-
-.newrecord:active {
-  transform: translateY(2px); /* クリック時に沈む */
-  box-shadow: 0 2px #f8b04b; /* 影を縮める */
-}
-
-/* ボタン内の矢印 */
-.newrecord::after {
-  content: "➔"; /* 矢印を表示 */
-  font-size: 16px; /* 矢印のサイズ */
-  margin-left: 10px; /* 文字との間に余白を追加 */
-  position: relative;
-  top: 1px; /* 矢印を微調整 */
-}
-
-.Record{
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-/* いいね・コメントアクション (study_records) */
-.record-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 0;
-  margin-top: 8px;
-}
-.h1-newtweet{
-  margin-top: 10px;
-  text-align: center;
-  font-family: "Kiwi Maru", serif;  padding: 10px;
-}
-
-.main-container-newStudy{
-  width: 40%;
-  margin-top: 10px;
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-bottom: 20px;
-  text-align: center;
-  font-family: "Kiwi Maru", serif;  padding: 10px;
-  box-shadow:
-  2px 2px 0px #022ef3, 
-  -2px -2px 0px #022ef3, 
-  1px -1px 0px #022ef3,
-  -1px 1px 0px #022ef3;
-}
-
-.field{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px
-}
-
-
-
-

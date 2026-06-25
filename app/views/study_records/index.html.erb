@@ -1,90 +1,140 @@
-<%= render 'shared/header' %>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Potta+One&display=swap" rel="stylesheet">
 
-<main class="main-container-Studyindex">
-  <section class="record-section">
-    <h2>勉強記録</h2>
-    <ul class="record-list">
-      <% @study_records.each do |record| %>
-        <li>
-          <div class="datarow">
-            <div class="heading">科目名</div>
-            <div class="Studyrecord"><%= record.subject %></div>
-          </div>
-          <div class="datarow">
-            <div class="heading">単元名</div>
-            <div class="Studyrecord"><%= record.section %></div>
-          </div>
-          <div class="datarow">
-            <div class="heading">勉強時間</div>
-            <div class="Studyrecord"><%= record.time %>min</div>
-          </div>
-          <div class="datarow">
-            <div class="heading">感想</div>
-            <div class="Studyrecord"><%= record.comment %></div>
-          </div>
-          <div class="datarow">
-            <div class="headingTime">投稿日時</div>
-            <div class="Studyrecord"><%= record.updated_at.strftime("%Y/%m/%d") %></div>
-          </div>
+<div class="sr-notebook-wrapper">
 
-          <div class="record-actions">
-            <% if @liked_record_ids.include?(record.id) %>
-              <%= button_to study_record_study_record_like_path(record, record),
-                  method: :delete, class: "like-btn liked" do %>
-                <i class="fa-solid fa-heart"></i> <%= record.study_record_likes.size %>
-              <% end %>
-            <% else %>
-              <%= button_to study_record_study_record_likes_path(record),
-                  method: :post, class: "like-btn" do %>
-                <i class="fa-regular fa-heart"></i> <%= record.study_record_likes.size %>
-              <% end %>
+  <% if user_signed_in? %>
+    <div class="floating-user-menu">
+      <div class="user-menu-wrapper">
+        <button class="user-icon-btn" id="userMenuToggle" type="button">
+          <% if current_user.image.attached? %>
+            <%= image_tag current_user.image, class: "user_image" %>
+          <% else %>
+            <%= image_tag "pro1.png", class: "user_image" %>
+          <% end %>
+        </button>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="dropdown-stat">
+            <span class="dropdown-label">フォロー中</span>
+            <strong class="dropdown-count"><%= current_user.following.count %>人</strong>
+          </div>
+          <div class="dropdown-stat">
+            <span class="dropdown-label">フォロワー</span>
+            <strong class="dropdown-count"><%= current_user.followers.count %>人</strong>
+          </div>
+          <hr class="dropdown-divider">
+          <%= link_to "試験日を設定する", new_deadline_path, class: "dropdown-setting-link" %>
+          <% if current_user.admin? %>
+            <%= link_to "管理者画面へ", youtubes_path, class: "dropdown-admin-link" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="sr-notebook">
+
+    <%# ── 左ページ: 勉強記録リスト ── %>
+    <div class="sr-notebook-page sr-left-page">
+      <div class="sr-page-header">
+        <span class="sr-page-title">勉強記録</span>
+        <%= link_to "＋ 新しい記録", new_study_record_path, class: "sr-new-btn" %>
+      </div>
+
+      <div class="sr-record-scroll">
+        <% if @study_records.empty? %>
+          <p class="sr-empty">まだ記録がありません</p>
+        <% else %>
+          <ul class="sr-record-list">
+            <% @study_records.each do |record| %>
+              <li class="sr-record-item">
+                <div class="sr-record-top">
+                  <span class="sr-subject"><%= record.subject %></span>
+                  <span class="sr-time"><%= record.time %>min</span>
+                </div>
+                <div class="sr-section-name"><%= record.section %></div>
+                <div class="sr-record-comment"><%= record.comment %></div>
+                <div class="sr-record-bottom">
+                  <span class="sr-date"><%= record.updated_at.strftime("%Y/%m/%d") %></span>
+                  <div class="sr-actions">
+                    <% if @liked_record_ids.include?(record.id) %>
+                      <%= button_to study_record_study_record_like_path(record, record),
+                          method: :delete, class: "sr-like-btn liked" do %>
+                        <i class="fa-solid fa-heart"></i> <%= record.study_record_likes.size %>
+                      <% end %>
+                    <% else %>
+                      <%= button_to study_record_study_record_likes_path(record),
+                          method: :post, class: "sr-like-btn" do %>
+                        <i class="fa-regular fa-heart"></i> <%= record.study_record_likes.size %>
+                      <% end %>
+                    <% end %>
+                    <%= link_to "💬 #{record.study_record_comments.size}", study_record_path(record), class: "sr-comment-link" %>
+                  </div>
+                </div>
+              </li>
             <% end %>
-            <%= link_to "コメント (#{record.study_record_comments.size})", study_record_path(record), class: "comment-link" %>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  </section>
-
-  <aside class="log-section">
-    <h2>勉強時間の集計</h2>
-    <div class="log-area">
-      <p class="TotalTime">総勉強時間: <%= @total_study_time %> min</p>
-      <ul class="log-list">
-        <% @total_time_by_subject.each do |subject, total_time| %>
-          <li>
-            <div class="datarow">
-              <div class="heading"><%= subject %></div>
-              <div class="Studyrecord"><%= total_time %> min</div>
-            </div>
-          </li>
+          </ul>
         <% end %>
-      </ul>
-      <div id="chart-data" data-chart='<%= @chart_data %>' style="display: none;"></div>
-      <canvas id="studyChart" width="400" height="200"></canvas>
-      <%= javascript_pack_tag 'study_chart' %>
-      <p class="Record"><%= link_to "新しい記録を追加", new_study_record_path, class: "newrecord" %></p>
+      </div>
     </div>
 
-    <div class="ranking-area">
-      <h2>フォロー内ランキング</h2>
-      <ol class="ranking-list">
-        <% @ranking.each_with_index do |entry, i| %>
-          <li class="ranking-item">
-            <span class="rank-number"><%= i + 1 %>位</span>
-            <span class="rank-name">
-              <%= link_to entry[:user].name, user_path(entry[:user]) %>
-              <% if entry[:user] == current_user %>
-                <span class="rank-me">（自分）</span>
-              <% end %>
-            </span>
-            <span class="rank-time"><%= entry[:total_time] %> min</span>
-          </li>
-        <% end %>
-      </ol>
+    <div class="sr-notebook-spine"></div>
+
+    <%# ── 右ページ: グラフ・ランキング ── %>
+    <div class="sr-notebook-page sr-right-page">
+      <div class="sr-right-scroll">
+
+        <div class="sr-section">
+          <div class="sr-section-heading">勉強時間の集計</div>
+          <p class="sr-total-time">総勉強時間: <strong><%= @total_study_time %></strong> min</p>
+          <div id="chart-data" data-chart='<%= @chart_data %>' style="display:none;"></div>
+          <canvas id="studyChart"></canvas>
+          <%= javascript_pack_tag 'study_chart' %>
+        </div>
+
+        <div class="sr-section">
+          <div class="sr-section-heading">フォロー内ランキング</div>
+          <ol class="sr-ranking-list">
+            <% @ranking.each_with_index do |entry, i| %>
+              <li class="sr-ranking-item">
+                <span class="sr-rank-num"><%= i + 1 %></span>
+                <span class="sr-rank-name">
+                  <%= link_to entry[:user].name, user_path(entry[:user]) %>
+                  <% if entry[:user] == current_user %>
+                    <span class="sr-rank-me">自分</span>
+                  <% end %>
+                </span>
+                <span class="sr-rank-time"><%= entry[:total_time] %>min</span>
+              </li>
+            <% end %>
+          </ol>
+        </div>
+
+      </div>
     </div>
-  </aside>
-</main>
-<footer>
-  <small>© 2024 SaitoRinsei @ kinchan</small>
-</footer>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    function initUserMenu() {
+      var toggle = document.getElementById('userMenuToggle');
+      var dropdown = document.getElementById('userDropdown');
+      if (!toggle || !dropdown) return;
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+      document.addEventListener('click', function () {
+        dropdown.classList.remove('open');
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initUserMenu);
+    } else {
+      initUserMenu();
+    }
+  })();
+</script>
