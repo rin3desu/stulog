@@ -3,37 +3,90 @@
 <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Potta+One&display=swap" rel="stylesheet">
 
 <div class="mypage-wrapper">
-  
-  <%= render 'shared/header' %>
 
-  <main class="main-content-mypage">
-    <%# 残り日数の表示 %>
-    <%# <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %> 
-    
-    <div class="deadline-container">
-      <% if @deadline.present? %>
-        <p class="deadline_string"><%= @deadline.content.present? ? @deadline.content : "試験" %>まで</p>
-        <p class="deadline_string2"><%= @remaining_days %>日</p>
-      <% else %>
-        <p class="deadline_string">試験日が設定されていません</p>
-      <% end %>
+  <% if user_signed_in? %>
+    <div class="floating-user-menu">
+      <div class="user-menu-wrapper">
+        <button class="user-icon-btn" id="userMenuToggle" type="button">
+          <% if current_user.image.attached? %>
+            <%= image_tag current_user.image, class: "user_image" %>
+          <% else %>
+            <%= image_tag "pro1.png", class: "user_image" %>
+          <% end %>
+        </button>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="dropdown-stat">
+            <span class="dropdown-label">フォロー中</span>
+            <strong class="dropdown-count"><%= current_user.following.count %>人</strong>
+          </div>
+          <div class="dropdown-stat">
+            <span class="dropdown-label">フォロワー</span>
+            <strong class="dropdown-count"><%= current_user.followers.count %>人</strong>
+          </div>
+          <hr class="dropdown-divider">
+          <%= link_to "試験日を設定する", new_deadline_path, class: "dropdown-setting-link" %>
+          <% if current_user.admin? %>
+            <%= link_to "管理者画面へ", youtubes_path, class: "dropdown-admin-link" %>
+          <% end %>
+        </div>
+      </div>
     </div>
-  
-    <div class="options">
-      <div class="content">
-        <%= link_to image_tag("studylecord.png"), study_records_path, class:"content" %>
-      </div>
-      <div class="content">
-        <%= link_to image_tag("testlog.png"), tweets_path %>
-      </div>
-      <div class="content">
-        <%= link_to image_tag("motivate.png"), youtubes_path %>
-      </div>
-    </div>
-  </main>
+  <% end %>
 
-  <footer>
-     <small>© 2024 SaitoRinsei @ kinchan</small>
-  </footer>
+  <div class="notebook">
+    <div class="notebook-page left-page">
+      <div class="notebook-logo-area">
+        <span class="notebook-title">StudyDiary</span>
+        <i class="fa-solid fa-cat notebook-cat-icon"></i>
+      </div>
+
+      <div class="countdown-area">
+        <% if @deadline.present? %>
+          <p class="exam-name-str">
+            <%= @deadline.content.present? ? @deadline.content : "試験" %>まで
+          </p>
+          <p class="days-str"><%= @remaining_days %>日</p>
+        <% else %>
+          <p class="exam-name-str no-exam">試験日が設定されていません</p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="notebook-spine"></div>
+
+    <div class="notebook-page right-page">
+      <div class="nav-links">
+        <%= link_to "勉強記録", study_records_path, class: "nav-oval" %>
+        <%= link_to "模試記録", tweets_path, class: "nav-oval" %>
+        <%= link_to "やる気UP", youtubes_path, class: "nav-oval" %>
+      </div>
+      <p class="notebook-copyright">© 2024 SaitoRinsei @ kinchan</p>
+    </div>
+  </div>
 
 </div>
+
+<script>
+  (function () {
+    function initUserMenu() {
+      var toggle = document.getElementById('userMenuToggle');
+      var dropdown = document.getElementById('userDropdown');
+      if (!toggle || !dropdown) return;
+
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+
+      document.addEventListener('click', function () {
+        dropdown.classList.remove('open');
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initUserMenu);
+    } else {
+      initUserMenu();
+    }
+  })();
+</script>
