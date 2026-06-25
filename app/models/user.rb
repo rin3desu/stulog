@@ -10,6 +10,11 @@ class User < ApplicationRecord
   has_many :study_record_likes, dependent: :destroy
   has_many :study_record_comments, dependent: :destroy
 
+  has_many :follows_as_follower, class_name: 'Follow', foreign_key: :follower_id, dependent: :destroy
+  has_many :follows_as_followed, class_name: 'Follow', foreign_key: :followed_id, dependent: :destroy
+  has_many :following, through: :follows_as_follower, source: :followed
+  has_many :followers, through: :follows_as_followed, source: :follower
+
   validates :name, presence: true
   validates :profile, length: { maximum: 200 }
 
@@ -17,5 +22,9 @@ class User < ApplicationRecord
 
   def already_liked?(tweet)
     likes.exists?(tweet_id: tweet.id)
+  end
+
+  def following?(user)
+    following.include?(user)
   end
 end
