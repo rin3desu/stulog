@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get 'mypage/index' => 'mypage#index'
 
   resources :deadline, only: [:new, :show, :create]
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    resource :follow, controller: 'follows', only: [:create, :destroy]
+  end
   get 'hello/index' => 'hello#index'
   root 'hello#index'
 
