@@ -57,6 +57,21 @@
   margin: 4px 0;
 }
 
+.dropdown-setting-link {
+  display: block;
+  padding: 12px 16px;
+  text-align: center;
+  color: #333;
+  font-family: "Kiwi Maru", serif;
+  font-size: 14px;
+  text-decoration: none;
+  background-color: #f8f8f8;
+
+  &:hover {
+    background-color: #eee;
+  }
+}
+
 .dropdown-admin-link {
   display: block;
   padding: 12px 16px;

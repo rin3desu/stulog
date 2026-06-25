@@ -18,8 +18,9 @@
           <span class="dropdown-label">フォロワー</span>
           <strong class="dropdown-count"><%= current_user.followers.count %>人</strong>
         </div>
+        <hr class="dropdown-divider">
+        <%= link_to "試験日を設定する", new_deadline_path, class: "dropdown-setting-link" %>
         <% if current_user.admin? %>
-          <hr class="dropdown-divider">
           <%= link_to "管理者画面へ", youtubes_path, class: "dropdown-admin-link" %>
         <% end %>
       </div>
