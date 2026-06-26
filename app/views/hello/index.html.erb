@@ -3,15 +3,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Potta+One&display=swap" rel="stylesheet">
 
 <div class="hello-wrapper">
-<div class="container">
-  <div class="cover">
-    <figure class="back">
+  <div class="hello-notebook">
 
-    </figure>
+    <%# ── 左ページ: ダーク × 猫 ── %>
+    <div class="hello-left-page">
+      <i class="fa-solid fa-cat hello-cat-icon"></i>
+    </div>
+
+    <div class="hello-spine"></div>
+
+    <%# ── 右ページ: 罫線 × ボタン ── %>
+    <div class="hello-right-page">
+      <div class="hello-logo-area">
+        <span class="hello-title">StudyDiary</span>
+      </div>
+      <div class="hello-nav-links">
+        <%= link_to "ログイン", mypage_index_path, class: "hello-oval" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "hello-oval" %>
+      </div>
+    </div>
+
   </div>
-  <div class="button-container">
-  <%= link_to "ログイン", mypage_index_path, class:"loginbotton"%>
-  <%= link_to "新規登録", new_user_registration_path,class:"loginbotton" %>
-  </div>
-</div>
 </div>

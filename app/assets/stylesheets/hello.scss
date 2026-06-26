@@ -1,93 +1,114 @@
 // Place all the styles related to the hello controller here.
-.login-body {
-  margin: 0;
-  padding: 0;
-  background-color: #F7E7CF;
-}
 
 .hello-wrapper {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #F7E7CF;
+  font-family: "Kiwi Maru", serif;
   padding: 20px;
 }
 
-.container {
+.hello-notebook {
+  display: flex;
   width: 92vw;
   max-width: 960px;
-  height: 70vh;
-  max-height: 560px;
-  background-color: #fff;
-  position: relative;
-  perspective: 1000px;
+  min-height: 560px;
+  border-radius: 6px;
   box-shadow:
-    inset 500px 0 80px rgba(0, 0, 0, 0.5),
-    0 2px 50px rgba(0, 0, 0, 0.5);
-  transition: 0.3s ease-in;
+    0 0 0 4px #8a8f99,
+    0 12px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
 }
 
-.container:hover {
-  box-shadow:
-    inset 20px 0 50px rgba(0, 0, 0, 0.1),
-    0 1px 50px rgba(0, 0, 0, 0.5);
+// ── 左ページ: ダーク背景 × 猫 ──
+.hello-left-page {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a1a2e;
 }
 
-.cover {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background: image-url("Notocover.png");
-  background-size: cover;
-  transform: rotateY(-10deg);
-  transform-style: preserve-3d;
-  transform-origin: left;
-  transition: all 0.5s ease-in;
+.hello-cat-icon {
+  font-size: 200px;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.75);
 }
 
-.container:hover .cover {
-  transform: rotateY(-180deg);
+// ── 背表紙（スパイン） ──
+.hello-spine {
+  width: 8px;
+  flex-shrink: 0;
+  background: linear-gradient(to right, #999, #eee 40%, #eee 60%, #999);
 }
 
-figure {
-  backface-visibility: hidden;
-  width: 100%;
-  height: 100%;
-}
-
-figure.back {
-  background: #DCDEDD;
-  transform: rotateY(-180deg);
-}
-
-.button-container {
+// ── 右ページ: 罫線 × ボタン ──
+.hello-right-page {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 32px 28px 24px;
+  background-color: #fff;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 31px,
+    #d4d4d4 31px,
+    #d4d4d4 32px
+  );
+  background-size: 100% 32px;
+  background-position: 0 68px;
+}
+
+.hello-logo-area {
+  display: inline-flex;
   align-items: center;
+  padding-bottom: 6px;
+  border-bottom: 2.5px solid #333;
+  margin-bottom: 40px;
+}
+
+.hello-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 0.03em;
+}
+
+.hello-nav-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  height: 100%;
+  align-items: center;
+  gap: 28px;
 }
 
-.loginbotton {
-  display: inline-block;
-  padding: 14px 60px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  background-color: #fefffe;
-  color: #333333;
-  text-decoration: none;
-  border-radius: 5px;
-  box-shadow:
-    2px 2px 0px #4161ef,
-    -2px -2px 0px #4161ef,
-    1px -1px 0px #4161ef,
-    -1px 1px 0px #4161ef;
-  font-size: 18px;
-  font-family: 'Kiwi Maru', serif;
-  transition: background-color 0.3s ease;
+.hello-oval {
+  display: block;
+  width: 55%;
+  min-width: 180px;
+  max-width: 260px;
+  padding: 16px 0;
+  border: 3px solid #333;
+  border-radius: 60px;
   text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Kiwi Maru", serif;
+  color: #333;
+  text-decoration: none;
+  background: #fff;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #4161ef;
+    color: #4161ef;
+    background-color: #f0f4ff;
+    transform: scale(1.03);
+  }
 }
 
-.loginbotton:hover {
-  background-color: #4161ef79;
-}
+// users/sessions・registrations 用（.login-body は users.scss で管理）
