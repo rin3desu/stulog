@@ -1,5 +1,157 @@
 // Place all the styles related to the youtubes controller here.
 // They will automatically be included in application.css.
+
+// ── index: ノートブックレイアウト ──
+
+.yt-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F7E7CF;
+  font-family: "Kiwi Maru", serif;
+  padding: 60px 20px 20px;
+}
+
+.yt-notebook {
+  display: flex;
+  width: 96vw;
+  max-width: 1040px;
+  height: 82vh;
+  max-height: 660px;
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 4px #8a8f99,
+    0 12px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.yt-notebook-page {
+  flex: 1;
+  position: relative;
+  background-color: #fff;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 31px,
+    #d4d4d4 31px,
+    #d4d4d4 32px
+  );
+  background-size: 100% 32px;
+  background-position: 0 60px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.yt-spine {
+  width: 8px;
+  flex-shrink: 0;
+  background: linear-gradient(to right, #999, #eee 40%, #eee 60%, #999);
+}
+
+.yt-left-page,
+.yt-right-page {
+  padding: 16px 16px 0;
+}
+
+.yt-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 2.5px solid #333;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.yt-page-title {
+  font-size: 17px;
+  font-weight: bold;
+  color: #333;
+}
+
+.yt-add-btn {
+  font-size: 12px;
+  font-family: "Kiwi Maru", serif;
+  color: #fff;
+  background-color: #415cf0;
+  border-radius: 20px;
+  padding: 4px 12px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+
+  &:hover { background-color: #2a43c7; }
+}
+
+.yt-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 16px;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+}
+
+.yt-empty {
+  color: #aaa;
+  font-size: 14px;
+  text-align: center;
+  padding: 32px 0;
+}
+
+.yt-video-item {
+  margin-bottom: 16px;
+}
+
+.yt-iframe-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+}
+
+.yt-video-body {
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.yt-admin-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.yt-edit-btn {
+  padding: 4px 12px;
+  background-color: #4161ef;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: "Kiwi Maru", serif;
+}
+
+.yt-delete-btn {
+  padding: 4px 12px;
+  background-color: #e55;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: "Kiwi Maru", serif;
+}
 * {
   margin: 0;
   padding: 0;

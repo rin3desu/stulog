@@ -1,33 +1,110 @@
-<%= render 'shared/header' %>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Potta+One&display=swap" rel="stylesheet">
 
-<h1 class="h1-youtube">おすすめYoutubeチャンネル</h1>
+<div class="yt-wrapper">
 
-<% if user_signed_in? && current_user.admin? %>
-  <div class="admin-actions">
-    <%= link_to "動画を追加する", new_youtube_path, class: "admin-btn" %>
-  </div>
-<% end %>
-
-<main class="main-container-Youtube">
-  <h2 class="h2-youtube">英語勉強法</h2>
-  <div class="English-section">
-    <% @youtubes.each do |t| %>
-      <% if t.youtube_url.present? %>
-        <div class="section-item">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= find_youtube_url(t.youtube_url) %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <% if user_signed_in? && current_user.admin? %>
-            <div class="video-admin-actions">
-              <%= link_to "編集", edit_youtube_path(t.id), class: "edit-btn" %>
-              <%= button_to "削除", youtube_path(t.id), method: :delete, class: "delete-btn", data: { confirm: "削除しますか？" } %>
-            </div>
+  <% if user_signed_in? %>
+    <div class="floating-user-menu">
+      <div class="user-menu-wrapper">
+        <button class="user-icon-btn" id="userMenuToggle" type="button">
+          <% if current_user.image.attached? %>
+            <%= image_tag current_user.image, class: "user_image" %>
+          <% else %>
+            <%= image_tag "pro1.png", class: "user_image" %>
+          <% end %>
+        </button>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="dropdown-stat">
+            <span class="dropdown-label">フォロー中</span>
+            <strong class="dropdown-count"><%= current_user.following.count %>人</strong>
+          </div>
+          <div class="dropdown-stat">
+            <span class="dropdown-label">フォロワー</span>
+            <strong class="dropdown-count"><%= current_user.followers.count %>人</strong>
+          </div>
+          <hr class="dropdown-divider">
+          <%= link_to "試験日を設定する", new_deadline_path, class: "dropdown-setting-link" %>
+          <% if current_user.admin? %>
+            <%= link_to "管理者画面へ", youtubes_path, class: "dropdown-admin-link" %>
           <% end %>
         </div>
-      <% end %>
-    <% end %>
-  </div>
-  <h2 class="h2-youtube">数学勉強法</h2>
-</main>
+      </div>
+    </div>
+  <% end %>
 
-<footer>
-  <small>© 2024 SaitoRinsei @ kinchan</small>
-</footer>
+  <div class="yt-notebook">
+
+    <%# ── 左ページ: 英語勉強法 ── %>
+    <div class="yt-notebook-page yt-left-page">
+      <div class="yt-page-header">
+        <span class="yt-page-title">英語勉強法</span>
+        <% if user_signed_in? && current_user.admin? %>
+          <%= link_to "＋ 動画を追加", new_youtube_path, class: "yt-add-btn" %>
+        <% end %>
+      </div>
+      <div class="yt-scroll">
+        <% if @youtubes.empty? %>
+          <p class="yt-empty">動画がまだありません</p>
+        <% else %>
+          <% @youtubes.each do |t| %>
+            <% if t.youtube_url.present? %>
+              <div class="yt-video-item">
+                <div class="yt-iframe-wrap">
+                  <iframe src="https://www.youtube.com/embed/<%= find_youtube_url(t.youtube_url) %>"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                </div>
+                <% if t.body.present? %>
+                  <p class="yt-video-body"><%= t.body %></p>
+                <% end %>
+                <% if user_signed_in? && current_user.admin? %>
+                  <div class="yt-admin-actions">
+                    <%= link_to "編集", edit_youtube_path(t.id), class: "yt-edit-btn" %>
+                    <%= button_to "削除", youtube_path(t.id), method: :delete, class: "yt-delete-btn", data: { confirm: "削除しますか？" } %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="yt-spine"></div>
+
+    <%# ── 右ページ: 数学勉強法（将来追加予定） ── %>
+    <div class="yt-notebook-page yt-right-page">
+      <div class="yt-page-header">
+        <span class="yt-page-title">数学勉強法</span>
+      </div>
+      <div class="yt-scroll">
+        <p class="yt-empty">準備中です</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    function initUserMenu() {
+      var toggle = document.getElementById('userMenuToggle');
+      var dropdown = document.getElementById('userDropdown');
+      if (!toggle || !dropdown) return;
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+      document.addEventListener('click', function () {
+        dropdown.classList.remove('open');
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initUserMenu);
+    } else {
+      initUserMenu();
+    }
+  })();
+</script>

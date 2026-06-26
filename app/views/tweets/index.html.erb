@@ -1,58 +1,133 @@
-<%= render 'shared/header' %>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&family=Potta+One&display=swap" rel="stylesheet">
 
-<main class="main-container-Tweets">
-  <h1>模試の振り返り</h1>
-  <%= link_to "新規投稿へ", new_tweet_path, class: "newTweet" %>
+<div class="tw-wrapper">
 
-  <ul class="tweet-list">
-    <% @tweets.each do |t| %>
-    <li class="tweet-item">
-      <div class="tweets-container">
-        <div class="user-icon">
-          <% if t.user.image.attached? %>
-            <%= image_tag t.user.image, size: '50x50', alt: 'user_icon' %>
+  <% if user_signed_in? %>
+    <div class="floating-user-menu">
+      <div class="user-menu-wrapper">
+        <button class="user-icon-btn" id="userMenuToggle" type="button">
+          <% if current_user.image.attached? %>
+            <%= image_tag current_user.image, class: "user_image" %>
           <% else %>
-            <%= image_tag "pro1.png", class: "user-image" %>
+            <%= image_tag "pro1.png", class: "user_image" %>
           <% end %>
-        </div>
-
-        <div class="tweet-details">
-          <p><strong>模試の名前</strong><%= t.test %></p>
-          <p><strong>科目名</strong><%= t.subject %></p>
-          <p><strong>単元名</strong><%= t.section %></p>
-        </div>
-      </div>
-
-      <div class="tweet-content">
-        <% if t.image.attached? %>
-          <div class="tweet-image">
-            <%= image_tag t.image, size: '300x200', alt: 't.image' %>
+        </button>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="dropdown-stat">
+            <span class="dropdown-label">フォロー中</span>
+            <strong class="dropdown-count"><%= current_user.following.count %>人</strong>
           </div>
-        <% end %>
-        <p class="comment-head">反省ポイント</p>
-        <p class="comment"><%= t.comment %></p>
+          <div class="dropdown-stat">
+            <span class="dropdown-label">フォロワー</span>
+            <strong class="dropdown-count"><%= current_user.followers.count %>人</strong>
+          </div>
+          <hr class="dropdown-divider">
+          <%= link_to "試験日を設定する", new_deadline_path, class: "dropdown-setting-link" %>
+          <% if current_user.admin? %>
+            <%= link_to "管理者画面へ", youtubes_path, class: "dropdown-admin-link" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="tw-notebook">
+
+    <%# ── 左ページ: 模試記録リスト ── %>
+    <div class="tw-notebook-page tw-left-page">
+      <div class="tw-page-header">
+        <span class="tw-page-title">模試記録</span>
+        <%= link_to "＋ 新しい記録", new_tweet_path, class: "tw-new-btn" %>
       </div>
 
-      <div class="tweet-actions">
-        <% if user_signed_in? %>
-          <% if @liked_tweet_ids.include?(t.id) %>
-            <%= button_to tweet_like_path(t, t), method: :delete, class: "like-btn liked" do %>
-              <i class="fa-solid fa-heart"></i> <%= t.likes.size %>
-            <% end %>
-          <% else %>
-            <%= button_to tweet_likes_path(t), method: :post, class: "like-btn" do %>
-              <i class="fa-regular fa-heart"></i> <%= t.likes.size %>
-            <% end %>
-          <% end %>
+      <div class="tw-scroll">
+        <% if @tweets.empty? %>
+          <p class="tw-empty">まだ記録がありません</p>
         <% else %>
-          <span class="like-count"><i class="fa-solid fa-heart"></i> <%= t.likes.size %></span>
+          <ul class="tw-list">
+            <% @tweets.each do |t| %>
+              <li class="tw-item">
+                <div class="tw-item-top">
+                  <div class="tw-user-icon">
+                    <% if t.user.image.attached? %>
+                      <%= image_tag t.user.image, class: "tw-avatar" %>
+                    <% else %>
+                      <%= image_tag "pro1.png", class: "tw-avatar" %>
+                    <% end %>
+                  </div>
+                  <div class="tw-item-meta">
+                    <span class="tw-test-name"><%= t.test %></span>
+                    <span class="tw-subject-str"><%= t.subject %> / <%= t.section %></span>
+                  </div>
+                </div>
+                <% if t.image.attached? %>
+                  <div class="tw-img-wrap">
+                    <%= image_tag t.image, class: "tw-img" %>
+                  </div>
+                <% end %>
+                <p class="tw-comment-label">反省ポイント</p>
+                <p class="tw-comment-body"><%= t.comment %></p>
+                <div class="tw-actions">
+                  <% if user_signed_in? %>
+                    <% if @liked_tweet_ids.include?(t.id) %>
+                      <%= button_to tweet_like_path(t, t), method: :delete, class: "tw-like-btn liked" do %>
+                        <i class="fa-solid fa-heart"></i> <%= t.likes.size %>
+                      <% end %>
+                    <% else %>
+                      <%= button_to tweet_likes_path(t), method: :post, class: "tw-like-btn" do %>
+                        <i class="fa-regular fa-heart"></i> <%= t.likes.size %>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <span class="tw-like-count"><i class="fa-solid fa-heart"></i> <%= t.likes.size %></span>
+                  <% end %>
+                  <%= link_to "💬 #{t.comments.size}", tweet_path(t), class: "tw-comment-link" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
         <% end %>
-        <%= link_to "コメント (#{t.comments.size})", tweet_path(t), class: "comment-link" %>
       </div>
-    </li>
-    <% end %>
-  </ul>
-</main>
-<footer>
-  <small>© 2024 SaitoRinsei @ kinchan</small>
-</footer>
+    </div>
+
+    <div class="tw-spine"></div>
+
+    <%# ── 右ページ: サマリー ── %>
+    <div class="tw-notebook-page tw-right-page">
+      <div class="tw-right-inner">
+        <p class="tw-right-label">StudyDiary</p>
+        <p class="tw-right-heading">模試の<br>振り返り</p>
+        <div class="tw-stat-box">
+          <span class="tw-stat-num"><%= @tweets.size %></span>
+          <span class="tw-stat-unit">件の記録</span>
+        </div>
+        <p class="tw-right-desc">失敗を記録して、<br>次に活かそう。</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    function initUserMenu() {
+      var toggle = document.getElementById('userMenuToggle');
+      var dropdown = document.getElementById('userDropdown');
+      if (!toggle || !dropdown) return;
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+      document.addEventListener('click', function () {
+        dropdown.classList.remove('open');
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initUserMenu);
+    } else {
+      initUserMenu();
+    }
+  })();
+</script>
